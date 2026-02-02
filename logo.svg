@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <!-- 배경 원 -->
+  <circle cx="100" cy="100" r="95" fill="url(#grad1)" opacity="0.2"/>
+  
+  <!-- 그라데이션 정의 -->
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 건물 아이콘 -->
+  <g transform="translate(50, 40)">
+    <!-- 메인 건물 -->
+    <rect x="20" y="40" width="60" height="100" fill="#667eea" rx="4"/>
+    
+    <!-- 창문들 -->
+    <rect x="30" y="50" width="15" height="15" fill="white" opacity="0.7" rx="2"/>
+    <rect x="55" y="50" width="15" height="15" fill="white" opacity="0.7" rx="2"/>
+    
+    <rect x="30" y="75" width="15" height="15" fill="white" opacity="0.7" rx="2"/>
+    <rect x="55" y="75" width="15" height="15" fill="white" opacity="0.7" rx="2"/>
+    
+    <rect x="30" y="100" width="15" height="15" fill="white" opacity="0.7" rx="2"/>
+    <rect x="55" y="100" width="15" height="15" fill="white" opacity="0.7" rx="2"/>
+    
+    <!-- 크레인 -->
+    <line x1="85" y1="140" x2="85" y2="20" stroke="#ff9966" stroke-width="3"/>
+    <line x1="85" y1="20" x2="50" y2="20" stroke="#ff9966" stroke-width="3"/>
+    <line x1="50" y1="20" x2="50" y2="35" stroke="#ff9966" stroke-width="2" stroke-dasharray="2,2"/>
+  </g>
+  
+  <!-- 텍스트 -->
+  <text x="100" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#667eea">PMIS</text>
+</svg>
