@@ -7,16 +7,6 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        :root {
-            --color-primary: #667eea;
-            --color-success: #56ab2f;
-            --color-warning: #f9d423;
-            --color-danger: #eb3349;
-            --color-safe: #43e97b;
-            --color-caution: #ffd93d;
-            --color-critical: #ff6b6b;
-        }
-
         body {
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             background-attachment: fixed;
@@ -27,7 +17,6 @@
 
         .container { max-width: 500px; margin: 0 auto; padding: 16px; }
         .app-container { max-width: 1600px; margin: 0 auto; padding: 16px; }
-        
         .flex { display: flex; }
         .items-center { align-items: center; }
         .justify-between { justify-content: space-between; }
@@ -36,7 +25,6 @@
         .grid { display: grid; }
         .grid-cols-1 { grid-template-columns: 1fr; }
         .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
-        .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
         .hidden { display: none !important; }
         
         .mb-2 { margin-bottom: 8px; }
@@ -49,7 +37,6 @@
         .p-8 { padding: 32px; }
         
         .text-center { text-align: center; }
-        .text-right { text-align: right; }
         .text-sm { font-size: 0.875rem; }
         .text-xs { font-size: 0.75rem; }
         .text-lg { font-size: 1.125rem; }
@@ -87,10 +74,9 @@
             text-align: center;
         }
 
-        .btn-primary { background: linear-gradient(135deg, var(--color-primary) 0%, #764ba2 100%); }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4); }
-        .btn-success { background: linear-gradient(135deg, var(--color-success) 0%, #a8e063 100%); }
-        .btn-danger { background: linear-gradient(135deg, var(--color-danger) 0%, #f45c43 100%); }
+        .btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .btn-success { background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%); }
+        .btn-danger { background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%); }
         .btn-sm { padding: 8px 16px; font-size: 12px; }
 
         .tab {
@@ -105,7 +91,7 @@
             white-space: nowrap;
         }
 
-        .tab.active { background: linear-gradient(135deg, var(--color-primary) 0%, #764ba2 100%); }
+        .tab.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
 
         .badge {
             display: inline-block;
@@ -115,90 +101,12 @@
             font-weight: 600;
         }
 
-        .badge-safe { background: linear-gradient(135deg, var(--color-safe) 0%, #38f9d7 100%); }
-        .badge-caution { background: linear-gradient(135deg, var(--color-caution) 0%, #ff9966 100%); }
-        .badge-warning { background: linear-gradient(135deg, var(--color-warning) 0%, #ff5e62 100%); }
-        .badge-critical { background: linear-gradient(135deg, var(--color-critical) 0%, #d63031 100%); }
+        .badge-safe { background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%); }
+        .badge-caution { background: linear-gradient(135deg, #f9d423 0%, #ff4e50 100%); }
+        .badge-warning { background: linear-gradient(135deg, #ff9966 0%, #ff5e62 100%); }
+        .badge-critical { background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%); }
 
         .role-admin { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
-        .role-manager { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
-        .role-worker { background: linear-gradient(135deg, var(--color-safe) 0%, #38f9d7 100%); }
-
-        /* WBS 트리 구조 */
-        .wbs-tree { list-style: none; padding-left: 0; }
-        .wbs-item {
-            padding: 12px;
-            margin-bottom: 8px;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .wbs-item:hover { background: rgba(255, 255, 255, 0.1); }
-        .wbs-item.level-1 { margin-left: 0; }
-        .wbs-item.level-2 { margin-left: 20px; }
-        .wbs-item.level-3 { margin-left: 40px; }
-        .wbs-item.level-4 { margin-left: 60px; }
-
-        .wbs-status-not-started { border-left: 4px solid #95a5a6; }
-        .wbs-status-in-progress { border-left: 4px solid var(--color-caution); }
-        .wbs-status-completed { border-left: 4px solid var(--color-safe); }
-        .wbs-status-delayed { border-left: 4px solid var(--color-critical); }
-
-        /* EVM 대시보드 */
-        .evm-card {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 20px;
-        }
-
-        .evm-value {
-            font-size: 2em;
-            font-weight: 700;
-            margin-top: 8px;
-        }
-
-        .evm-label {
-            font-size: 0.9em;
-            color: #9ca3af;
-        }
-
-        .gauge-container {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .gauge-svg {
-            transform: rotate(-90deg);
-        }
-
-        .risk-matrix {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 8px;
-            margin-top: 16px;
-        }
-
-        .risk-cell {
-            aspect-ratio: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            font-size: 0.85em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .risk-cell:hover { transform: scale(1.1); }
-        .risk-low { background: #43e97b; color: #000; }
-        .risk-medium { background: #ffd93d; color: #000; }
-        .risk-high { background: #ff9966; color: #fff; }
-        .risk-critical { background: #ff6b6b; color: #fff; }
 
         input, select, textarea {
             background: rgba(255, 255, 255, 0.1);
@@ -210,10 +118,10 @@
             font-size: 14px;
         }
 
-        input::placeholder, textarea::placeholder { color: rgba(255, 255, 255, 0.5); }
+        input::placeholder { color: rgba(255, 255, 255, 0.5); }
         input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: var(--color-primary);
+            border-color: #667eea;
             background: rgba(255, 255, 255, 0.15);
         }
 
@@ -254,7 +162,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 16px;
             padding: 30px;
-            max-width: 1000px;
+            max-width: 900px;
             width: 100%;
             margin: 20px auto;
         }
@@ -292,19 +200,84 @@
             color: #a8edea;
         }
 
-        .chart-container {
+        .site-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .site-card-thumbnail {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+
+        .no-thumbnail {
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9em;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .photo-item {
             position: relative;
-            height: 300px;
-            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .photo-delete {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(235, 51, 73, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+        }
+
+        .evm-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .evm-value {
+            font-size: 2em;
+            font-weight: 700;
+            margin-top: 8px;
         }
 
         .min-h-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-
         .text-gray-300 { color: #d1d5db; }
         .text-gray-400 { color: #9ca3af; }
-        .text-red-400 { color: #f87171; }
-        .text-green-400 { color: #4ade80; }
-        .text-yellow-400 { color: #fbbf24; }
 
         @media (min-width: 768px) {
             .md-grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
@@ -322,169 +295,32 @@
 
         .message-success { color: #4ade80; }
         .message-error { color: #f87171; }
-
-        .alert {
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin-bottom: 16px;
-        }
-
-        .alert-warning {
-            background: rgba(251, 191, 36, 0.2);
-            border-left: 4px solid #fbbf24;
-        }
-
-        .alert-danger {
-            background: rgba(239, 68, 68, 0.2);
-            border-left: 4px solid #ef4444;
-        }
-
-        .alert-success {
-            background: rgba(34, 197, 94, 0.2);
-            border-left: 4px solid #22c55e;
-        }
-
-        .s-curve-container {
-            position: relative;
-            width: 100%;
-            height: 400px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 12px;
-            padding: 20px;
-        }
-
-        canvas {
-            max-width: 100%;
-        }
-
-        .stat-card {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 2.5em;
-            font-weight: 700;
-            margin: 12px 0;
-        }
-
-        .stat-label {
-            font-size: 0.9em;
-            color: #9ca3af;
-        }
-
-        .progress-bar-container {
-            width: 100%;
-            height: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-bar {
-            height: 100%;
-            transition: width 0.5s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-weight: 600;
-            font-size: 0.9em;
-        }
-
-        .tbm-signature {
-            border: 2px dashed rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
-            padding: 40px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .tbm-signature:hover {
-            border-color: var(--color-primary);
-            background: rgba(102, 126, 234, 0.1);
-        }
-
-        .tbm-signature canvas {
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
-            background: white;
-        }
     </style>
 </head>
 <body>
     <!-- 로그인 화면 -->
-    <div id="selectScreen" class="min-h-screen">
-        <div class="container">
-            <div class="glass p-8 fade-in text-center">
-                <h1 class="text-3xl font-bold mb-2">🏗️ 차세대 PMIS</h1>
-                <p class="text-gray-300 mb-2">건설사업관리시스템</p>
-                <p class="text-sm text-gray-400 mb-8">WBS 기반 EVM 통합 플랫폼</p>
-                
-                <button onclick="showLogin()" class="btn btn-primary w-full mb-4">로그인</button>
-                <button onclick="showSignup()" class="btn btn-success w-full">회원가입</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 로그인 화면 -->
-    <div id="loginScreen" class="hidden min-h-screen">
+    <div id="loginScreen" class="min-h-screen">
         <div class="container">
             <div class="glass p-8 fade-in">
-                <h1 class="text-3xl font-bold text-center mb-2">🏗️ 로그인</h1>
-                <p class="text-center text-gray-300 mb-8">차세대 건설사업관리시스템</p>
+                <h1 class="text-3xl font-bold text-center mb-2">🏗️ 차세대 PMIS</h1>
+                <p class="text-center text-gray-300 mb-8">건설사업관리시스템</p>
                 
                 <form onsubmit="handleLogin(event)">
                     <div class="mb-4">
                         <label>이메일</label>
-                        <input type="email" id="loginEmail" required placeholder="이메일을 입력하세요">
+                        <input type="email" id="loginEmail" required>
                     </div>
                     <div class="mb-6">
                         <label>비밀번호</label>
-                        <input type="password" id="loginPassword" required placeholder="비밀번호를 입력하세요">
+                        <input type="password" id="loginPassword" required>
                     </div>
-                    <button type="submit" class="btn btn-primary w-full mb-4">로그인</button>
-                    <button type="button" onclick="backToSelect()" class="btn btn-danger w-full">돌아가기</button>
+                    <button type="submit" class="btn btn-primary w-full">로그인</button>
                     <p class="text-xs text-gray-400 mt-4 text-center">
-                        관리자 계정: admin@pmis.com
+                        관리자 계정: admin@pmis.com / 1234
                     </p>
                 </form>
 
                 <div id="loginMessage" class="mt-4 text-center text-sm"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 회원가입 화면 -->
-    <div id="signupScreen" class="hidden min-h-screen">
-        <div class="container">
-            <div class="glass p-8 fade-in">
-                <h1 class="text-3xl font-bold text-center mb-2">🏗️ 회원가입</h1>
-                <p class="text-center text-gray-300 mb-8">차세대 건설사업관리시스템</p>
-                
-                <form onsubmit="handleSignup(event)">
-                    <div class="mb-4">
-                        <label>이메일</label>
-                        <input type="email" id="signupEmail" required>
-                    </div>
-                    <div class="mb-4">
-                        <label>이름</label>
-                        <input type="text" id="signupName" required>
-                    </div>
-                    <div class="mb-6">
-                        <label>비밀번호</label>
-                        <input type="password" id="signupPassword" required minlength="4">
-                    </div>
-                    <button type="submit" class="btn btn-primary w-full mb-4">가입 신청</button>
-                    <button type="button" onclick="backToSelect()" class="btn btn-danger w-full">돌아가기</button>
-                </form>
-
-                <div id="signupMessage" class="mt-4 text-center text-sm"></div>
             </div>
         </div>
     </div>
@@ -502,154 +338,80 @@
 
             <div class="glass p-4 mb-4 overflow-x-auto">
                 <div class="flex gap-2" style="min-width: max-content;">
-                    <button class="tab active" onclick="switchTab('dashboard')" id="tabDashboard">통합 대시보드</button>
-                    <button class="tab" onclick="switchTab('wbs')" id="tabWBS">WBS 관리</button>
-                    <button class="tab" onclick="switchTab('daily')" id="tabDaily">작업일보</button>
+                    <button class="tab active" onclick="switchTab('dashboard')" id="tabDashboard">대시보드</button>
+                    <button class="tab" onclick="switchTab('sites')" id="tabSites">현장관리</button>
+                    <button class="tab" onclick="switchTab('wbs')" id="tabWBS">WBS</button>
                     <button class="tab" onclick="switchTab('evm')" id="tabEVM">EVM 분석</button>
                     <button class="tab" onclick="switchTab('safety')" id="tabSafety">안전관리</button>
-                    <button class="tab hidden" onclick="switchTab('pending')" id="tabPending">가입승인</button>
                 </div>
             </div>
 
-            <!-- 통합 대시보드 -->
+            <!-- 대시보드 -->
             <div id="contentDashboard" class="fade-in">
-                <!-- EVM 핵심 지표 -->
                 <div class="grid grid-cols-1 md-grid-cols-4 gap-4 mb-4">
                     <div class="evm-card">
-                        <div class="evm-label">계획공사비 (PV)</div>
-                        <div class="evm-value" id="dashPV">0억</div>
+                        <div class="text-sm text-gray-400">총 현장 수</div>
+                        <div class="evm-value" id="dashTotalSites">0</div>
                     </div>
                     <div class="evm-card">
-                        <div class="evm-label">달성공사비 (EV)</div>
-                        <div class="evm-value" id="dashEV">0억</div>
+                        <div class="text-sm text-gray-400">평균 공정률</div>
+                        <div class="evm-value" id="dashAvgProgress">0%</div>
                     </div>
                     <div class="evm-card">
-                        <div class="evm-label">실투입비 (AC)</div>
-                        <div class="evm-value" id="dashAC">0억</div>
+                        <div class="text-sm text-gray-400">위험성평가</div>
+                        <div class="evm-value" id="dashRisks">0건</div>
                     </div>
                     <div class="evm-card">
-                        <div class="evm-label">프로젝트 상태</div>
-                        <div class="evm-value"><span id="dashStatus" class="badge">-</span></div>
+                        <div class="text-sm text-gray-400">WBS 항목</div>
+                        <div class="evm-value" id="dashWBS">0</div>
                     </div>
                 </div>
 
-                <!-- S-Curve 차트 -->
-                <div class="glass-dark p-6 mb-4">
-                    <h3 class="text-lg font-bold mb-4">S-Curve (공정 곡선)</h3>
-                    <div class="s-curve-container">
-                        <canvas id="sCurveChart"></canvas>
-                    </div>
-                </div>
-
-                <!-- 성과 지표 -->
-                <div class="grid grid-cols-1 md-grid-cols-2 gap-4 mb-4">
-                    <div class="glass-dark p-6">
-                        <h3 class="text-lg font-bold mb-4">공정 성과 지수 (SPI)</h3>
-                        <div class="gauge-container" id="spiGauge"></div>
-                        <div class="text-center mt-4">
-                            <div class="text-3xl font-bold" id="spiValue">0.00</div>
-                            <div class="text-sm text-gray-400 mt-2" id="spiStatus">-</div>
-                        </div>
-                    </div>
-                    <div class="glass-dark p-6">
-                        <h3 class="text-lg font-bold mb-4">원가 성과 지수 (CPI)</h3>
-                        <div class="gauge-container" id="cpiGauge"></div>
-                        <div class="text-center mt-4">
-                            <div class="text-3xl font-bold" id="cpiValue">0.00</div>
-                            <div class="text-sm text-gray-400 mt-2" id="cpiStatus">-</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 안전 현황 -->
                 <div class="glass-dark p-6">
-                    <h3 class="text-lg font-bold mb-4">금일 안전 현황</h3>
-                    <div class="grid grid-cols-1 md-grid-cols-3 gap-4">
-                        <div class="stat-card">
-                            <div class="stat-label">위험성평가</div>
-                            <div class="stat-value" id="riskCount">0</div>
-                            <div class="text-sm text-gray-400">건</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">TBM 실시</div>
-                            <div class="stat-value" id="tbmCount">0</div>
-                            <div class="text-sm text-gray-400">회</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">무재해 일수</div>
-                            <div class="stat-value text-green-400" id="safeDays">0</div>
-                            <div class="text-sm text-gray-400">일</div>
-                        </div>
-                    </div>
+                    <h3 class="text-lg font-bold mb-4">최근 현장</h3>
+                    <div id="dashSiteList"></div>
                 </div>
+            </div>
+
+            <!-- 현장관리 -->
+            <div id="contentSites" class="hidden">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold">현장 관리</h2>
+                    <button onclick="openSiteModal()" class="btn btn-primary">+ 현장 추가</button>
+                </div>
+                <div id="sitesList"></div>
             </div>
 
             <!-- WBS 관리 -->
             <div id="contentWBS" class="hidden">
                 <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-2xl font-bold">WBS (작업분류체계)</h2>
+                    <h2 class="text-2xl font-bold">WBS 관리</h2>
                     <button onclick="openWBSModal()" class="btn btn-primary">+ WBS 추가</button>
                 </div>
-
                 <div class="glass-dark p-6">
-                    <div id="wbsTree" class="wbs-tree"></div>
-                </div>
-            </div>
-
-            <!-- 작업일보 -->
-            <div id="contentDaily" class="hidden">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-2xl font-bold">작업일보</h2>
-                    <button onclick="openDailyModal()" class="btn btn-primary">+ 일보 작성</button>
-                </div>
-
-                <div class="glass-dark p-6">
-                    <div id="dailyList"></div>
+                    <div id="wbsList"></div>
                 </div>
             </div>
 
             <!-- EVM 분석 -->
             <div id="contentEVM" class="hidden">
-                <h2 class="text-2xl font-bold mb-4">EVM 상세 분석</h2>
-                
-                <!-- 예측 지표 -->
-                <div class="grid grid-cols-1 md-grid-cols-3 gap-4 mb-4">
+                <h2 class="text-2xl font-bold mb-4">EVM 분석</h2>
+                <div class="grid grid-cols-1 md-grid-cols-4 gap-4">
                     <div class="evm-card">
-                        <div class="evm-label">완료시점 예상공사비 (EAC)</div>
-                        <div class="evm-value" id="eacValue">0억</div>
-                        <div class="text-sm text-gray-400 mt-2">현재 추세 지속 시</div>
+                        <div class="text-sm text-gray-400">BAC (총예산)</div>
+                        <div class="evm-value" id="evmBAC">0억</div>
                     </div>
                     <div class="evm-card">
-                        <div class="evm-label">예상차이 (VAC)</div>
-                        <div class="evm-value" id="vacValue">0억</div>
-                        <div class="text-sm text-gray-400 mt-2" id="vacStatus">-</div>
+                        <div class="text-sm text-gray-400">PV (계획공사비)</div>
+                        <div class="evm-value" id="evmPV">0억</div>
                     </div>
                     <div class="evm-card">
-                        <div class="evm-label">완료 성과 지수 (TCPI)</div>
-                        <div class="evm-value" id="tcpiValue">0.00</div>
-                        <div class="text-sm text-gray-400 mt-2">남은 작업 효율 목표</div>
+                        <div class="text-sm text-gray-400">EV (달성공사비)</div>
+                        <div class="evm-value" id="evmEV">0억</div>
                     </div>
-                </div>
-
-                <!-- 공종별 EVM 분석 -->
-                <div class="glass-dark p-6">
-                    <h3 class="text-lg font-bold mb-4">공종별 성과 분석</h3>
-                    <div class="overflow-x-auto">
-                        <table class="data-table" id="evmTable">
-                            <thead>
-                                <tr>
-                                    <th>공종</th>
-                                    <th>BAC</th>
-                                    <th>PV</th>
-                                    <th>EV</th>
-                                    <th>AC</th>
-                                    <th>SPI</th>
-                                    <th>CPI</th>
-                                    <th>상태</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
+                    <div class="evm-card">
+                        <div class="text-sm text-gray-400">SPI</div>
+                        <div class="evm-value" id="evmSPI">0.00</div>
                     </div>
                 </div>
             </div>
@@ -657,89 +419,106 @@
             <!-- 안전관리 -->
             <div id="contentSafety" class="hidden">
                 <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-2xl font-bold">안전관리 (중대재해처벌법 대응)</h2>
+                    <h2 class="text-2xl font-bold">안전관리</h2>
                     <button onclick="openRiskModal()" class="btn btn-primary">+ 위험성평가</button>
                 </div>
-
-                <!-- 위험성평가 목록 -->
-                <div class="glass-dark p-6 mb-4">
-                    <h3 class="text-lg font-bold mb-4">위험성평가 현황</h3>
+                <div class="glass-dark p-6">
                     <div id="riskList"></div>
-                </div>
-
-                <!-- TBM 기록 -->
-                <div class="glass-dark p-6">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-bold">TBM (Tool Box Meeting)</h3>
-                        <button onclick="openTBMModal()" class="btn btn-success btn-sm">+ TBM 실시</button>
-                    </div>
-                    <div id="tbmList"></div>
-                </div>
-            </div>
-
-            <!-- 가입승인 -->
-            <div id="contentPending" class="hidden">
-                <h2 class="text-2xl font-bold mb-4">가입 승인</h2>
-                <div class="glass-dark p-6">
-                    <table class="data-table" id="pendingTable">
-                        <thead><tr><th>이메일</th><th>이름</th><th>신청일</th><th>승인</th></tr></thead>
-                        <tbody></tbody>
-                    </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- WBS 추가 모달 -->
-    <div id="wbsModal" class="modal">
+    <!-- 현장 추가 모달 -->
+    <div id="siteModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="text-2xl font-bold">WBS 등록</h3>
+                <h3 class="text-2xl font-bold">현장 등록</h3>
+                <button onclick="closeSiteModal()" class="modal-close">&times;</button>
+            </div>
+            
+            <form onsubmit="saveSite(event)">
+                <input type="hidden" id="siteId">
+
+                <div class="form-section">
+                    <div class="form-section-title">기본 정보</div>
+                    <div class="mb-4">
+                        <label>공사명 *</label>
+                        <input type="text" id="siteName" required>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label>시작일 *</label>
+                            <input type="date" id="siteStartDate" required>
+                        </div>
+                        <div>
+                            <label>종료예정일 *</label>
+                            <input type="date" id="siteEndDate" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-section-title">공정률</div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label>계획 공정률 (%)</label>
+                            <input type="number" id="plannedProgress" min="0" max="100" value="0">
+                        </div>
+                        <div>
+                            <label>실제 공정률 (%)</label>
+                            <input type="number" id="actualProgress" min="0" max="100" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-section-title">관리 항목</div>
+                    <div class="mb-4">
+                        <label>중요 보고사항</label>
+                        <textarea id="importantNotes"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-section-title">사진 추가</div>
+                    <button type="button" onclick="addPhoto()" class="btn btn-success mb-4">+ 사진 추가</button>
+                    <div id="photoContainer" class="photo-grid"></div>
+                </div>
+
+                <div class="flex gap-4">
+                    <button type="submit" class="btn btn-success flex-1">저장</button>
+                    <button type="button" onclick="closeSiteModal()" class="btn btn-danger flex-1">취소</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- WBS 추가 모달 -->
+    <div id="wbsModal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 class="text-2xl font-bold">WBS 추가</h3>
                 <button onclick="closeWBSModal()" class="modal-close">&times;</button>
             </div>
             
             <form onsubmit="saveWBS(event)">
-                <input type="hidden" id="wbsId">
-                
-                <div class="form-section">
-                    <div class="form-section-title">기본 정보</div>
-                    <div class="mb-4">
-                        <label>WBS 코드 *</label>
-                        <input type="text" id="wbsCode" required placeholder="예: 1.1.1">
+                <div class="mb-4">
+                    <label>WBS 코드 *</label>
+                    <input type="text" id="wbsCode" required placeholder="예: 1.1.1">
+                </div>
+                <div class="mb-4">
+                    <label>작업명 *</label>
+                    <input type="text" id="wbsName" required>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label>예산 (백만원)</label>
+                        <input type="number" id="wbsBudget" value="0">
                     </div>
-                    <div class="mb-4">
-                        <label>작업명 *</label>
-                        <input type="text" id="wbsName" required>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4 mb-4">
-                        <div>
-                            <label>레벨</label>
-                            <select id="wbsLevel" required>
-                                <option value="1">Level 1 - 프로젝트</option>
-                                <option value="2">Level 2 - 공종</option>
-                                <option value="3">Level 3 - 공정</option>
-                                <option value="4">Level 4 - 작업</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label>상태</label>
-                            <select id="wbsStatus">
-                                <option value="not-started">착수 전</option>
-                                <option value="in-progress">진행 중</option>
-                                <option value="completed">완료</option>
-                                <option value="delayed">지연</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4 mb-4">
-                        <div>
-                            <label>예산 (백만원) *</label>
-                            <input type="number" id="wbsBudget" required min="0">
-                        </div>
-                        <div>
-                            <label>진행률 (%)</label>
-                            <input type="number" id="wbsProgress" min="0" max="100" value="0">
-                        </div>
+                    <div>
+                        <label>진행률 (%)</label>
+                        <input type="number" id="wbsProgress" min="0" max="100" value="0">
                     </div>
                 </div>
 
@@ -751,279 +530,61 @@
         </div>
     </div>
 
-    <!-- 작업일보 모달 -->
-    <div id="dailyModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="text-2xl font-bold">작업일보 작성</h3>
-                <button onclick="closeDailyModal()" class="modal-close">&times;</button>
-            </div>
-            
-            <form onsubmit="saveDailyReport(event)">
-                <div class="form-section">
-                    <div class="form-section-title">기본 정보</div>
-                    <div class="grid grid-cols-2 gap-4 mb-4">
-                        <div>
-                            <label>작성일 *</label>
-                            <input type="date" id="dailyDate" required>
-                        </div>
-                        <div>
-                            <label>작성자</label>
-                            <input type="text" id="dailyAuthor" readonly>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-3 gap-4 mb-4">
-                        <div>
-                            <label>날씨</label>
-                            <select id="dailyWeather">
-                                <option value="맑음">☀️ 맑음</option>
-                                <option value="흐림">☁️ 흐림</option>
-                                <option value="비">🌧️ 비</option>
-                                <option value="눈">❄️ 눈</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label>기온 (°C)</label>
-                            <input type="number" id="dailyTemp">
-                        </div>
-                        <div>
-                            <label>작업가능 여부</label>
-                            <select id="dailyWorkable">
-                                <option value="가능">가능</option>
-                                <option value="부분가능">부분가능</option>
-                                <option value="불가">불가</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-section">
-                    <div class="form-section-title">작업 내용 (WBS 기반)</div>
-                    <div class="mb-4">
-                        <label>작업 WBS 선택 *</label>
-                        <select id="dailyWBS" required onchange="loadWBSInfo()">
-                            <option value="">선택하세요</option>
-                        </select>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4 mb-4">
-                        <div>
-                            <label>금일 실적 물량</label>
-                            <input type="number" id="dailyQuantity" step="0.01">
-                        </div>
-                        <div>
-                            <label>누적 물량</label>
-                            <input type="number" id="dailyCumulative" readonly>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label>작업 상세 내용</label>
-                        <textarea id="dailyWorkDesc"></textarea>
-                    </div>
-                </div>
-
-                <div class="form-section">
-                    <div class="form-section-title">투입 자원</div>
-                    <div class="grid grid-cols-2 gap-4 mb-4">
-                        <div>
-                            <label>투입 인력 (명)</label>
-                            <input type="number" id="dailyLabor" min="0">
-                        </div>
-                        <div>
-                            <label>장비 사용</label>
-                            <input type="text" id="dailyEquipment" placeholder="예: 크레인 1대">
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label>주요 자재 반입/사용</label>
-                        <textarea id="dailyMaterial" placeholder="예: 레미콘 100㎥"></textarea>
-                    </div>
-                </div>
-
-                <div class="flex gap-4">
-                    <button type="submit" class="btn btn-success flex-1">저장</button>
-                    <button type="button" onclick="closeDailyModal()" class="btn btn-danger flex-1">취소</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <!-- 위험성평가 모달 -->
     <div id="riskModal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content" style="max-width: 600px;">
             <div class="modal-header">
                 <h3 class="text-2xl font-bold">위험성평가</h3>
                 <button onclick="closeRiskModal()" class="modal-close">&times;</button>
             </div>
             
-            <form onsubmit="saveRiskAssessment(event)">
-                <div class="form-section">
-                    <div class="form-section-title">1단계: 사전준비</div>
-                    <div class="mb-4">
-                        <label>평가 대상 작업 (WBS)</label>
-                        <select id="riskWBS" required>
-                            <option value="">선택하세요</option>
-                        </select>
+            <form onsubmit="saveRisk(event)">
+                <div class="mb-4">
+                    <label>작업명</label>
+                    <input type="text" id="riskWork" required>
+                </div>
+                <div class="mb-4">
+                    <label>위험 유형</label>
+                    <select id="riskType" required>
+                        <option value="">선택</option>
+                        <option value="추락">추락</option>
+                        <option value="낙하">낙하</option>
+                        <option value="협착">협착</option>
+                        <option value="감전">감전</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label>빈도 (1-4)</label>
+                        <input type="number" id="riskFreq" min="1" max="4" required>
                     </div>
-                    <div class="mb-4">
-                        <label>작업 일자</label>
-                        <input type="date" id="riskDate" required>
+                    <div>
+                        <label>강도 (1-4)</label>
+                        <input type="number" id="riskSeverity" min="1" max="4" required>
                     </div>
                 </div>
-
-                <div class="form-section">
-                    <div class="form-section-title">2단계: 유해·위험요인 파악</div>
-                    <div class="mb-4">
-                        <label>위험 유형</label>
-                        <select id="riskType" required>
-                            <option value="">선택하세요</option>
-                            <option value="추락">추락</option>
-                            <option value="낙하·비래">낙하·비래</option>
-                            <option value="협착">협착</option>
-                            <option value="전도">전도</option>
-                            <option value="붕괴·도괴">붕괴·도괴</option>
-                            <option value="감전">감전</option>
-                            <option value="화재·폭발">화재·폭발</option>
-                            <option value="질식">질식</option>
-                        </select>
-                    </div>
-                    <div class="mb-4">
-                        <label>위험 상황 설명</label>
-                        <textarea id="riskDesc" required placeholder="구체적인 위험 상황을 기술하세요"></textarea>
-                    </div>
-                </div>
-
-                <div class="form-section">
-                    <div class="form-section-title">3단계: 위험성 결정</div>
-                    <div class="grid grid-cols-2 gap-4 mb-4">
-                        <div>
-                            <label>빈도 (Frequency)</label>
-                            <select id="riskFreq" required onchange="calculateRisk()">
-                                <option value="">선택</option>
-                                <option value="1">1 - 거의 없음</option>
-                                <option value="2">2 - 가끔</option>
-                                <option value="3">3 - 자주</option>
-                                <option value="4">4 - 매우 자주</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label>강도 (Severity)</label>
-                            <select id="riskSeverity" required onchange="calculateRisk()">
-                                <option value="">선택</option>
-                                <option value="1">1 - 경미</option>
-                                <option value="2">2 - 보통</option>
-                                <option value="3">3 - 심각</option>
-                                <option value="4">4 - 치명적</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label>위험 등급 (자동 계산)</label>
-                        <div class="risk-matrix" id="riskMatrix"></div>
-                        <div class="text-center mt-4">
-                            <div class="text-2xl font-bold">위험도: <span id="riskScore">-</span></div>
-                            <div class="mt-2"><span id="riskLevel" class="badge">-</span></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-section">
-                    <div class="form-section-title">4단계: 감소대책 수립</div>
-                    <div class="mb-4" id="measuresRequired" style="display:none;">
-                        <div class="alert alert-danger">
-                            <strong>⚠️ 필수:</strong> '상' 등급 위험은 반드시 감소대책을 수립해야 합니다.
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label>안전 조치사항 *</label>
-                        <textarea id="riskMeasures" required placeholder="구체적인 안전 조치사항을 입력하세요"></textarea>
-                    </div>
-                    <div class="mb-4">
-                        <label>담당자</label>
-                        <input type="text" id="riskManager">
-                    </div>
+                <div class="mb-4">
+                    <label>감소대책</label>
+                    <textarea id="riskMeasures" required></textarea>
                 </div>
 
                 <div class="flex gap-4">
-                    <button type="submit" class="btn btn-success flex-1">저장 및 TBM 생성</button>
+                    <button type="submit" class="btn btn-success flex-1">저장</button>
                     <button type="button" onclick="closeRiskModal()" class="btn btn-danger flex-1">취소</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- TBM 모달 -->
-    <div id="tbmModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="text-2xl font-bold">TBM (Tool Box Meeting)</h3>
-                <button onclick="closeTBMModal()" class="modal-close">&times;</button>
-            </div>
-            
-            <form onsubmit="saveTBM(event)">
-                <div class="form-section">
-                    <div class="form-section-title">회의 정보</div>
-                    <div class="grid grid-cols-2 gap-4 mb-4">
-                        <div>
-                            <label>일시</label>
-                            <input type="datetime-local" id="tbmDate" required>
-                        </div>
-                        <div>
-                            <label>장소</label>
-                            <input type="text" id="tbmLocation" required>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label>참석 인원</label>
-                        <input type="number" id="tbmAttendees" min="1" required>
-                    </div>
-                </div>
-
-                <div class="form-section">
-                    <div class="form-section-title">교육 내용 (위험성평가 연동)</div>
-                    <div class="mb-4">
-                        <label>금일 위험성평가 선택</label>
-                        <select id="tbmRisk" onchange="loadRiskToTBM()">
-                            <option value="">수동 입력</option>
-                        </select>
-                    </div>
-                    <div class="mb-4">
-                        <label>교육 내용</label>
-                        <textarea id="tbmContent" required></textarea>
-                    </div>
-                </div>
-
-                <div class="form-section">
-                    <div class="form-section-title">참석자 서명</div>
-                    <div class="tbm-signature" onclick="openSignature()">
-                        <p class="text-gray-400">📝 클릭하여 서명하기</p>
-                        <canvas id="signatureCanvas" width="400" height="200" class="hidden"></canvas>
-                    </div>
-                    <button type="button" onclick="clearSignature()" class="btn btn-sm btn-danger mt-2">서명 지우기</button>
-                </div>
-
-                <div class="flex gap-4 mt-6">
-                    <button type="submit" class="btn btn-success flex-1">저장</button>
-                    <button type="button" onclick="closeTBMModal()" class="btn btn-danger flex-1">취소</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <script>
-        // ==================== 데이터 관리 (LocalStorage 기반 DB) ====================
         class Store {
             static get(key) {
                 try { return JSON.parse(localStorage.getItem(key)) || []; }
                 catch { return []; }
             }
             static set(key, val) {
-                try {
-                    localStorage.setItem(key, JSON.stringify(val));
-                } catch (e) {
-                    if (e.name === 'QuotaExceededError') {
-                        alert('저장 공간이 부족합니다.');
-                    }
-                }
+                try { localStorage.setItem(key, JSON.stringify(val)); }
+                catch (e) { alert('저장 공간이 부족합니다.'); }
             }
             static getObj(key) {
                 try { return JSON.parse(localStorage.getItem(key)) || {}; }
@@ -1031,7 +592,6 @@
             }
         }
 
-        // 관리자 계정 초기화
         function init() {
             const users = Store.get('users');
             if (!users.find(u => u.email === 'admin@pmis.com')) {
@@ -1045,44 +605,10 @@
                 });
                 Store.set('users', users);
             }
-
-            // 샘플 프로젝트 데이터
-            const projects = Store.get('projects');
-            if (projects.length === 0) {
-                projects.push({
-                    id: 'proj-001',
-                    name: '○○건설 신축공사',
-                    bac: 50000, // 500억
-                    startDate: '2024-01-01',
-                    endDate: '2025-12-31',
-                    status: 'in-progress'
-                });
-                Store.set('projects', projects);
-            }
         }
 
         let user = null;
-        let currentProject = null;
-        let signaturePad = null;
-
-        // ==================== 인증 ====================
-        function showLogin() {
-            hide('selectScreen');
-            show('loginScreen');
-        }
-
-        function showSignup() {
-            hide('selectScreen');
-            show('signupScreen');
-        }
-
-        function backToSelect() {
-            hide('loginScreen');
-            hide('signupScreen');
-            show('selectScreen');
-            document.getElementById('loginMessage').textContent = '';
-            document.getElementById('signupMessage').textContent = '';
-        }
+        let currentPhotos = [];
 
         function handleLogin(e) {
             e.preventDefault();
@@ -1092,51 +618,14 @@
             const users = Store.get('users');
             const found = users.find(u => u.email === email && u.password === password);
 
-            if (!found) {
+            if (!found || !found.approved) {
                 showMsg('loginMessage', '이메일 또는 비밀번호가 올바르지 않습니다.', 'error');
-                return;
-            }
-
-            if (!found.approved) {
-                showMsg('loginMessage', '관리자의 승인을 기다리고 있습니다.', 'error');
                 return;
             }
 
             user = found;
             Store.set('currentUser', found);
-            
-            // 프로젝트 선택
-            const projects = Store.get('projects');
-            if (projects.length > 0) {
-                currentProject = projects[0];
-            }
-            
             showApp();
-        }
-
-        function handleSignup(e) {
-            e.preventDefault();
-            const email = document.getElementById('signupEmail').value.trim();
-            const name = document.getElementById('signupName').value.trim();
-            const password = document.getElementById('signupPassword').value.trim();
-
-            const users = Store.get('users');
-            
-            if (users.find(u => u.email === email)) {
-                showMsg('signupMessage', '이미 등록된 이메일입니다.', 'error');
-                return;
-            }
-
-            users.push({
-                id: 'user-' + Date.now(),
-                email, name, password,
-                role: 'worker',
-                approved: false,
-                createdAt: new Date().toISOString()
-            });
-
-            Store.set('users', users);
-            showMsg('signupMessage', '가입 신청 완료! 관리자 승인을 기다려주세요.', 'success');
         }
 
         function logout() {
@@ -1144,7 +633,7 @@
                 user = null;
                 localStorage.removeItem('currentUser');
                 hide('appScreen');
-                show('selectScreen');
+                show('loginScreen');
             }
         }
 
@@ -1152,20 +641,13 @@
             hide('loginScreen');
             show('appScreen');
 
-            const roles = { 'admin': '관리자', 'manager': '책임자', 'worker': '실무자' };
             document.getElementById('userInfo').innerHTML = `
-                <span class="badge role-${user.role}">${roles[user.role]}</span>
-                ${user.name} (${user.email})
+                <span class="badge role-admin">관리자</span> ${user.name}
             `;
-
-            if (user.role === 'admin') {
-                show('tabPending');
-            }
 
             loadDashboard();
         }
 
-        // ==================== 탭 전환 ====================
         function switchTab(tab) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('[id^="content"]').forEach(c => hide(c.id));
@@ -1177,241 +659,90 @@
             if (contentEl) show(contentEl.id);
 
             if (tab === 'dashboard') loadDashboard();
+            else if (tab === 'sites') loadSites();
             else if (tab === 'wbs') loadWBS();
-            else if (tab === 'daily') loadDailyReports();
             else if (tab === 'evm') loadEVM();
             else if (tab === 'safety') loadSafety();
-            else if (tab === 'pending') loadPending();
         }
 
-        // ==================== EVM 계산 엔진 ====================
-        class EVMEngine {
-            static calculate(bac, plannedPercent, actualPercent, actualCost) {
-                const pv = bac * (plannedPercent / 100);
-                const ev = bac * (actualPercent / 100);
-                const ac = actualCost;
-
-                // 성과 지표
-                const sv = ev - pv;
-                const cv = ev - ac;
-                const spi = pv > 0 ? ev / pv : 0;
-                const cpi = ac > 0 ? ev / ac : 0;
-
-                // 예측
-                const eac = cpi > 0 ? ac + (bac - ev) / cpi : bac;
-                const vac = bac - eac;
-                const tcpi = (bac - ev) > 0 && (bac - ac) > 0 ? (bac - ev) / (bac - ac) : 0;
-
-                // 상태 판정
-                let status = '';
-                let statusClass = '';
-                
-                if (spi >= 1.0 && cpi >= 1.0) {
-                    status = '양호';
-                    statusClass = 'badge-safe';
-                } else if (spi < 0.9 && cpi < 0.9) {
-                    status = '심각';
-                    statusClass = 'badge-critical';
-                } else if (spi < 0.9 || cpi < 0.9) {
-                    status = '주의';
-                    statusClass = 'badge-warning';
-                } else {
-                    status = '보통';
-                    statusClass = 'badge-caution';
-                }
-
-                return {
-                    pv, ev, ac, sv, cv, spi, cpi, eac, vac, tcpi,
-                    status, statusClass
-                };
-            }
-
-            static getStatusText(spi, type = 'schedule') {
-                if (type === 'schedule') {
-                    if (spi > 1.0) return '조기 달성';
-                    if (spi >= 0.9) return '정상';
-                    return '지연 - 만회대책 필요';
-                } else {
-                    if (spi > 1.0) return '예산 절감';
-                    if (spi >= 0.9) return '정상';
-                    return '예산 초과 - 원가분석 필요';
-                }
-            }
-        }
-
-        // ==================== 대시보드 ====================
         function loadDashboard() {
-            if (!currentProject) return;
-
-            const wbsItems = Store.get('wbs');
-            const dailyReports = Store.get('dailyReports');
-
-            // 전체 BAC
-            const bac = currentProject.bac;
-
-            // 계획 공정률 계산 (간소화: 날짜 기반)
-            const today = new Date();
-            const start = new Date(currentProject.startDate);
-            const end = new Date(currentProject.endDate);
-            const totalDays = (end - start) / (1000 * 60 * 60 * 24);
-            const elapsedDays = (today - start) / (1000 * 60 * 60 * 24);
-            const plannedPercent = Math.min(100, Math.max(0, (elapsedDays / totalDays) * 100));
-
-            // 실제 공정률 (WBS 진행률 가중 평균)
-            let actualPercent = 0;
-            if (wbsItems.length > 0) {
-                const totalBudget = wbsItems.reduce((sum, w) => sum + (w.budget || 0), 0);
-                const weighted = wbsItems.reduce((sum, w) => sum + (w.budget || 0) * (w.progress || 0), 0);
-                actualPercent = totalBudget > 0 ? weighted / totalBudget : 0;
-            }
-
-            // 실투입비 (샘플 데이터)
-            const actualCost = bac * (actualPercent / 100) * 1.05; // 5% 초과 가정
-
-            // EVM 계산
-            const evm = EVMEngine.calculate(bac, plannedPercent, actualPercent, actualCost);
-
-            // 대시보드 업데이트
-            document.getElementById('dashPV').textContent = (evm.pv / 100).toFixed(1) + '억';
-            document.getElementById('dashEV').textContent = (evm.ev / 100).toFixed(1) + '억';
-            document.getElementById('dashAC').textContent = (evm.ac / 100).toFixed(1) + '억';
-            document.getElementById('dashStatus').textContent = evm.status;
-            document.getElementById('dashStatus').className = 'badge ' + evm.statusClass;
-
-            document.getElementById('spiValue').textContent = evm.spi.toFixed(2);
-            document.getElementById('spiStatus').textContent = EVMEngine.getStatusText(evm.spi, 'schedule');
-            document.getElementById('cpiValue').textContent = evm.cpi.toFixed(2);
-            document.getElementById('cpiStatus').textContent = EVMEngine.getStatusText(evm.cpi, 'cost');
-
-            // 게이지 그리기
-            drawGauge('spiGauge', evm.spi);
-            drawGauge('cpiGauge', evm.cpi);
-
-            // S-Curve 그리기
-            drawSCurve(plannedPercent, actualPercent);
-
-            // 안전 통계
+            const sites = Store.get('sites');
+            const wbs = Store.get('wbs');
             const risks = Store.get('risks');
-            const tbms = Store.get('tbms');
-            document.getElementById('riskCount').textContent = risks.length;
-            document.getElementById('tbmCount').textContent = tbms.length;
-            document.getElementById('safeDays').textContent = calculateSafeDays();
-        }
 
-        function drawGauge(containerId, value) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
-
-            const radius = 80;
-            const circumference = Math.PI * radius;
-            const offset = circumference - (Math.min(value, 1.5) / 1.5) * circumference;
-
-            let color = '#43e97b'; // 녹색
-            if (value < 0.9) color = '#ff6b6b'; // 빨강
-            else if (value < 1.0) color = '#ffd93d'; // 노랑
-
-            container.innerHTML = `
-                <svg width="200" height="120" style="transform: rotate(-90deg);">
-                    <path d="M 20,100 A 80,80 0 0,1 180,100"
-                        fill="none"
-                        stroke="rgba(255,255,255,0.1)"
-                        stroke-width="15"/>
-                    <path d="M 20,100 A 80,80 0 0,1 180,100"
-                        fill="none"
-                        stroke="${color}"
-                        stroke-width="15"
-                        stroke-dasharray="${circumference}"
-                        stroke-dashoffset="${offset}"
-                        stroke-linecap="round"/>
-                </svg>
-            `;
-        }
-
-        function drawSCurve(planned, actual) {
-            const canvas = document.getElementById('sCurveChart');
-            if (!canvas) return;
-
-            const ctx = canvas.getContext('2d');
-            const width = canvas.width = canvas.offsetWidth;
-            const height = canvas.height = 300;
-
-            ctx.clearRect(0, 0, width, height);
-
-            // 그리드
-            ctx.strokeStyle = 'rgba(255,255,255,0.1)';
-            ctx.lineWidth = 1;
-            for (let i = 0; i <= 10; i++) {
-                const y = (height / 10) * i;
-                ctx.beginPath();
-                ctx.moveTo(0, y);
-                ctx.lineTo(width, y);
-                ctx.stroke();
-            }
-
-            // 계획 곡선 (S-Curve 근사)
-            ctx.strokeStyle = '#667eea';
-            ctx.lineWidth = 3;
-            ctx.beginPath();
-            for (let x = 0; x <= width; x++) {
-                const progress = (x / width) * 100;
-                // S-Curve 공식 (간소화)
-                const y = height - (height * (progress / 100));
-                if (x === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            }
-            ctx.stroke();
-
-            // 실적 곡선
-            ctx.strokeStyle = '#43e97b';
-            ctx.lineWidth = 3;
-            ctx.beginPath();
-            const actualX = (width * actual) / 100;
-            const actualY = height - (height * (actual / 100));
-            ctx.moveTo(0, height);
-            ctx.lineTo(actualX, actualY);
-            ctx.stroke();
-
-            // 범례
-            ctx.fillStyle = '#fff';
-            ctx.font = '14px sans-serif';
-            ctx.fillText('계획', 20, 30);
-            ctx.fillStyle = '#667eea';
-            ctx.fillRect(70, 22, 30, 3);
+            document.getElementById('dashTotalSites').textContent = sites.length;
             
-            ctx.fillStyle = '#fff';
-            ctx.fillText('실적', 120, 30);
-            ctx.fillStyle = '#43e97b';
-            ctx.fillRect(170, 22, 30, 3);
-        }
-
-        function calculateSafeDays() {
-            // 샘플: 무재해 일수 계산
-            return 120;
-        }
-
-        // ==================== WBS 관리 ====================
-        function loadWBS() {
-            const wbsItems = Store.get('wbs');
-            const container = document.getElementById('wbsTree');
+            const avgProgress = sites.length > 0 
+                ? Math.round(sites.reduce((sum, s) => sum + (s.actualProgress || 0), 0) / sites.length)
+                : 0;
+            document.getElementById('dashAvgProgress').textContent = avgProgress + '%';
             
-            if (wbsItems.length === 0) {
-                container.innerHTML = '<div class="text-center text-gray-400 p-8">등록된 WBS가 없습니다</div>';
+            document.getElementById('dashRisks').textContent = risks.length + '건';
+            document.getElementById('dashWBS').textContent = wbs.length;
+
+            const container = document.getElementById('dashSiteList');
+            if (sites.length === 0) {
+                container.innerHTML = '<div class="text-center text-gray-400 p-8">등록된 현장이 없습니다</div>';
                 return;
             }
 
-            container.innerHTML = wbsItems.map(wbs => {
-                const statusClass = 'wbs-status-' + wbs.status;
+            container.innerHTML = sites.slice(0, 5).map(site => {
+                const ratio = site.plannedProgress > 0 ? (site.actualProgress / site.plannedProgress) : 1;
+                let statusClass = 'badge-safe';
+                let statusText = '안전';
+                
+                if (ratio < 0.90) { statusClass = 'badge-critical'; statusText = '심각'; }
+                else if (ratio < 0.95) { statusClass = 'badge-warning'; statusText = '주의'; }
+                else if (ratio < 1.00) { statusClass = 'badge-caution'; statusText = '보통'; }
+
                 return `
-                    <div class="wbs-item level-${wbs.level} ${statusClass}">
+                    <div class="site-card">
                         <div class="flex justify-between items-center">
                             <div>
-                                <strong>${wbs.code}</strong> ${wbs.name}
-                                <div class="text-sm text-gray-400 mt-1">
-                                    예산: ${wbs.budget.toLocaleString()}백만원 | 진행률: ${wbs.progress}%
-                                </div>
+                                <strong>${site.name}</strong>
+                                <div class="text-sm text-gray-400">${site.startDate} ~ ${site.endDate}</div>
                             </div>
-                            <div>
-                                <span class="badge badge-${getWBSStatusBadge(wbs.status)}">${getWBSStatusText(wbs.status)}</span>
+                            <span class="badge ${statusClass}">${statusText}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function loadSites() {
+            const sites = Store.get('sites');
+            const container = document.getElementById('sitesList');
+
+            if (sites.length === 0) {
+                container.innerHTML = '<div class="glass-dark p-6 text-center text-gray-400">등록된 현장이 없습니다</div>';
+                return;
+            }
+
+            container.innerHTML = sites.map(site => {
+                const ratio = site.plannedProgress > 0 ? (site.actualProgress / site.plannedProgress) : 1;
+                let statusClass = 'badge-safe';
+                
+                if (ratio < 0.90) statusClass = 'badge-critical';
+                else if (ratio < 0.95) statusClass = 'badge-warning';
+                else if (ratio < 1.00) statusClass = 'badge-caution';
+
+                const thumbnail = site.photos?.[0]?.data;
+
+                return `
+                    <div class="site-card">
+                        <div class="flex gap-4">
+                            ${thumbnail 
+                                ? `<img src="${thumbnail}" class="site-card-thumbnail">`
+                                : `<div class="no-thumbnail">사진 없음</div>`
+                            }
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold mb-2">${site.name}</h3>
+                                <div class="text-sm text-gray-400 mb-2">${site.startDate} ~ ${site.endDate}</div>
+                                <div class="mb-2">
+                                    계획: ${site.plannedProgress}% | 실제: ${site.actualProgress}%
+                                    <span class="badge ${statusClass} ml-2">${Math.round(ratio * 100)}%</span>
+                                </div>
+                                ${site.importantNotes ? `<div class="text-sm text-gray-300">${site.importantNotes}</div>` : ''}
                             </div>
                         </div>
                     </div>
@@ -1419,31 +750,131 @@
             }).join('');
         }
 
-        function getWBSStatusBadge(status) {
-            const map = {
-                'not-started': 'caution',
-                'in-progress': 'warning',
-                'completed': 'safe',
-                'delayed': 'critical'
-            };
-            return map[status] || 'caution';
+        function openSiteModal() {
+            document.getElementById('siteId').value = '';
+            document.getElementById('siteName').value = '';
+            document.getElementById('siteStartDate').value = '';
+            document.getElementById('siteEndDate').value = '';
+            document.getElementById('plannedProgress').value = '0';
+            document.getElementById('actualProgress').value = '0';
+            document.getElementById('importantNotes').value = '';
+            document.getElementById('photoContainer').innerHTML = '';
+            currentPhotos = [];
+            show('siteModal');
         }
 
-        function getWBSStatusText(status) {
-            const map = {
-                'not-started': '착수 전',
-                'in-progress': '진행 중',
-                'completed': '완료',
-                'delayed': '지연'
+        function closeSiteModal() {
+            hide('siteModal');
+        }
+
+        function addPhoto() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.capture = 'environment';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    resizeImage(file, (data) => {
+                        currentPhotos.push({ id: Date.now(), data });
+                        renderPhotos();
+                    });
+                }
             };
-            return map[status] || status;
+            input.click();
+        }
+
+        function resizeImage(file, callback) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > 800) {
+                        height = (height * 800) / width;
+                        width = 800;
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    callback(canvas.toDataURL('image/jpeg', 0.7));
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function renderPhotos() {
+            const container = document.getElementById('photoContainer');
+            container.innerHTML = currentPhotos.map((photo, idx) => `
+                <div class="photo-item">
+                    <img src="${photo.data}">
+                    <button type="button" class="photo-delete" onclick="deletePhoto(${idx})">&times;</button>
+                </div>
+            `).join('');
+        }
+
+        function deletePhoto(idx) {
+            currentPhotos.splice(idx, 1);
+            renderPhotos();
+        }
+
+        function saveSite(e) {
+            e.preventDefault();
+
+            const sites = Store.get('sites');
+            const site = {
+                id: 'site-' + Date.now(),
+                name: document.getElementById('siteName').value,
+                startDate: document.getElementById('siteStartDate').value,
+                endDate: document.getElementById('siteEndDate').value,
+                plannedProgress: parseInt(document.getElementById('plannedProgress').value) || 0,
+                actualProgress: parseInt(document.getElementById('actualProgress').value) || 0,
+                importantNotes: document.getElementById('importantNotes').value,
+                photos: currentPhotos,
+                ownerId: user.id,
+                createdAt: new Date().toISOString()
+            };
+
+            sites.push(site);
+            Store.set('sites', sites);
+
+            closeSiteModal();
+            loadSites();
+            loadDashboard();
+            alert('현장이 저장되었습니다.');
+        }
+
+        function loadWBS() {
+            const wbs = Store.get('wbs');
+            const container = document.getElementById('wbsList');
+
+            if (wbs.length === 0) {
+                container.innerHTML = '<div class="text-center text-gray-400 p-8">등록된 WBS가 없습니다</div>';
+                return;
+            }
+
+            container.innerHTML = wbs.map(w => `
+                <div class="site-card">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <strong>${w.code}</strong> ${w.name}
+                            <div class="text-sm text-gray-400">예산: ${w.budget.toLocaleString()}백만원 | 진행률: ${w.progress}%</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
         }
 
         function openWBSModal() {
-            document.getElementById('wbsId').value = '';
             document.getElementById('wbsCode').value = '';
             document.getElementById('wbsName').value = '';
-            document.getElementById('wbsBudget').value = '';
+            document.getElementById('wbsBudget').value = '0';
             document.getElementById('wbsProgress').value = '0';
             show('wbsModal');
         }
@@ -1455,166 +886,42 @@
         function saveWBS(e) {
             e.preventDefault();
 
-            const wbsItems = Store.get('wbs');
-            const wbs = {
+            const wbs = Store.get('wbs');
+            wbs.push({
                 id: 'wbs-' + Date.now(),
                 code: document.getElementById('wbsCode').value,
                 name: document.getElementById('wbsName').value,
-                level: parseInt(document.getElementById('wbsLevel').value),
-                status: document.getElementById('wbsStatus').value,
-                budget: parseFloat(document.getElementById('wbsBudget').value),
-                progress: parseFloat(document.getElementById('wbsProgress').value),
-                projectId: currentProject.id,
+                budget: parseInt(document.getElementById('wbsBudget').value) || 0,
+                progress: parseInt(document.getElementById('wbsProgress').value) || 0,
                 createdAt: new Date().toISOString()
-            };
-
-            wbsItems.push(wbs);
-            Store.set('wbs', wbsItems);
-
-            closeWBSModal();
-            loadWBS();
-            alert('WBS가 등록되었습니다.');
-        }
-
-        // ==================== 작업일보 ====================
-        function loadDailyReports() {
-            const reports = Store.get('dailyReports');
-            const container = document.getElementById('dailyList');
-
-            if (reports.length === 0) {
-                container.innerHTML = '<div class="text-center text-gray-400 p-8">등록된 작업일보가 없습니다</div>';
-                return;
-            }
-
-            container.innerHTML = reports.sort((a, b) => new Date(b.date) - new Date(a.date)).map(r => `
-                <div class="glass-dark p-4 mb-4">
-                    <div class="flex justify-between items-start mb-2">
-                        <div>
-                            <strong>${r.date}</strong>
-                            <span class="text-sm text-gray-400 ml-4">${r.weather} / ${r.temp}°C</span>
-                        </div>
-                        <span class="badge badge-${r.workable === '가능' ? 'safe' : 'warning'}">${r.workable}</span>
-                    </div>
-                    <div class="text-sm text-gray-300 mb-2">
-                        작업: ${r.wbsName || '-'} | 실적: ${r.quantity || 0}
-                    </div>
-                    <div class="text-sm text-gray-400">
-                        투입 인력: ${r.labor || 0}명
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function openDailyModal() {
-            document.getElementById('dailyDate').value = new Date().toISOString().split('T')[0];
-            document.getElementById('dailyAuthor').value = user.name;
-
-            // WBS 목록 로드
-            const wbsItems = Store.get('wbs');
-            const select = document.getElementById('dailyWBS');
-            select.innerHTML = '<option value="">선택하세요</option>' +
-                wbsItems.map(w => `<option value="${w.id}">${w.code} ${w.name}</option>`).join('');
-
-            show('dailyModal');
-        }
-
-        function closeDailyModal() {
-            hide('dailyModal');
-        }
-
-        function loadWBSInfo() {
-            const wbsId = document.getElementById('dailyWBS').value;
-            if (!wbsId) return;
-
-            const wbs = Store.get('wbs').find(w => w.id === wbsId);
-            if (wbs) {
-                // 누적 물량 계산 (간소화)
-                document.getElementById('dailyCumulative').value = wbs.progress || 0;
-            }
-        }
-
-        function saveDailyReport(e) {
-            e.preventDefault();
-
-            const reports = Store.get('dailyReports');
-            const wbsId = document.getElementById('dailyWBS').value;
-            const wbs = Store.get('wbs').find(w => w.id === wbsId);
-
-            const report = {
-                id: 'daily-' + Date.now(),
-                date: document.getElementById('dailyDate').value,
-                author: user.id,
-                weather: document.getElementById('dailyWeather').value,
-                temp: parseFloat(document.getElementById('dailyTemp').value) || null,
-                workable: document.getElementById('dailyWorkable').value,
-                wbsId: wbsId,
-                wbsName: wbs ? wbs.name : '',
-                quantity: parseFloat(document.getElementById('dailyQuantity').value) || 0,
-                workDesc: document.getElementById('dailyWorkDesc').value,
-                labor: parseInt(document.getElementById('dailyLabor').value) || 0,
-                equipment: document.getElementById('dailyEquipment').value,
-                material: document.getElementById('dailyMaterial').value,
-                createdAt: new Date().toISOString()
-            };
-
-            reports.push(report);
-            Store.set('dailyReports', reports);
-
-            closeDailyModal();
-            loadDailyReports();
-            alert('작업일보가 저장되었습니다.');
-        }
-
-        // ==================== EVM 상세 분석 ====================
-        function loadEVM() {
-            const wbsItems = Store.get('wbs');
-            const tbody = document.querySelector('#evmTable tbody');
-            tbody.innerHTML = '';
-
-            wbsItems.forEach(wbs => {
-                const bac = wbs.budget;
-                const planned = 50; // 샘플: 계획 50%
-                const actual = wbs.progress;
-                const ac = bac * (actual / 100) * 1.05;
-
-                const evm = EVMEngine.calculate(bac, planned, actual, ac);
-
-                const row = tbody.insertRow();
-                row.innerHTML = `
-                    <td>${wbs.name}</td>
-                    <td>${bac.toLocaleString()}</td>
-                    <td>${evm.pv.toFixed(0)}</td>
-                    <td>${evm.ev.toFixed(0)}</td>
-                    <td>${evm.ac.toFixed(0)}</td>
-                    <td>${evm.spi.toFixed(2)}</td>
-                    <td>${evm.cpi.toFixed(2)}</td>
-                    <td><span class="badge ${evm.statusClass}">${evm.status}</span></td>
-                `;
             });
 
-            // 전체 EAC, VAC 계산
-            if (currentProject) {
-                const bac = currentProject.bac;
-                const planned = 50;
-                const actual = 40;
-                const ac = bac * 0.45;
-
-                const evm = EVMEngine.calculate(bac, planned, actual, ac);
-
-                document.getElementById('eacValue').textContent = (evm.eac / 100).toFixed(1) + '억';
-                document.getElementById('vacValue').textContent = (evm.vac / 100).toFixed(1) + '억';
-                document.getElementById('vacStatus').textContent = evm.vac >= 0 ? '예산 절감' : '예산 초과';
-                document.getElementById('tcpiValue').textContent = evm.tcpi.toFixed(2);
-            }
+            Store.set('wbs', wbs);
+            closeWBSModal();
+            loadWBS();
+            loadDashboard();
+            alert('WBS가 저장되었습니다.');
         }
 
-        // ==================== 안전관리 ====================
+        function loadEVM() {
+            const wbs = Store.get('wbs');
+            const totalBudget = wbs.reduce((sum, w) => sum + w.budget, 0);
+            const avgProgress = wbs.length > 0 
+                ? wbs.reduce((sum, w) => sum + w.progress, 0) / wbs.length
+                : 0;
+
+            const bac = totalBudget;
+            const pv = bac * 0.5; // 가정: 계획 50%
+            const ev = bac * (avgProgress / 100);
+            const spi = pv > 0 ? (ev / pv) : 0;
+
+            document.getElementById('evmBAC').textContent = (bac / 100).toFixed(1) + '억';
+            document.getElementById('evmPV').textContent = (pv / 100).toFixed(1) + '억';
+            document.getElementById('evmEV').textContent = (ev / 100).toFixed(1) + '억';
+            document.getElementById('evmSPI').textContent = spi.toFixed(2);
+        }
+
         function loadSafety() {
-            loadRiskList();
-            loadTBMList();
-        }
-
-        function loadRiskList() {
             const risks = Store.get('risks');
             const container = document.getElementById('riskList');
 
@@ -1623,61 +930,30 @@
                 return;
             }
 
-            container.innerHTML = risks.map(r => `
-                <div class="glass-dark p-4 mb-4">
-                    <div class="flex justify-between items-start mb-2">
+            container.innerHTML = risks.map(r => {
+                const score = r.frequency * r.severity;
+                let level = '하';
+                if (score >= 12) level = '상';
+                else if (score >= 8) level = '중';
+
+                return `
+                    <div class="site-card">
                         <div>
-                            <strong>${r.wbsName}</strong>
-                            <div class="text-sm text-gray-400">${r.date}</div>
-                        </div>
-                        <span class="badge badge-${getRiskBadge(r.level)}">${r.level}</span>
-                    </div>
-                    <div class="text-sm mb-2">${r.type}: ${r.desc}</div>
-                    <div class="text-sm text-gray-300">조치: ${r.measures}</div>
-                </div>
-            `).join('');
-        }
-
-        function getRiskBadge(level) {
-            if (level === '상') return 'critical';
-            if (level === '중') return 'warning';
-            return 'caution';
-        }
-
-        function loadTBMList() {
-            const tbms = Store.get('tbms');
-            const container = document.getElementById('tbmList');
-
-            if (tbms.length === 0) {
-                container.innerHTML = '<div class="text-center text-gray-400 p-8">TBM 기록이 없습니다</div>';
-                return;
-            }
-
-            container.innerHTML = tbms.map(t => `
-                <div class="glass-dark p-4 mb-4">
-                    <div class="flex justify-between items-start mb-2">
-                        <div>
-                            <strong>${new Date(t.date).toLocaleString('ko-KR')}</strong>
-                            <div class="text-sm text-gray-400">${t.location} | 참석: ${t.attendees}명</div>
+                            <strong>${r.work}</strong> - ${r.type}
+                            <span class="badge badge-${level === '상' ? 'critical' : 'warning'} ml-2">${level}</span>
+                            <div class="text-sm text-gray-400 mt-2">조치: ${r.measures}</div>
                         </div>
                     </div>
-                    <div class="text-sm text-gray-300">${t.content}</div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         function openRiskModal() {
-            // WBS 목록 로드
-            const wbsItems = Store.get('wbs');
-            const select = document.getElementById('riskWBS');
-            select.innerHTML = '<option value="">선택하세요</option>' +
-                wbsItems.map(w => `<option value="${w.id}">${w.code} ${w.name}</option>`).join('');
-
-            document.getElementById('riskDate').value = new Date().toISOString().split('T')[0];
-            
-            // 위험성 매트릭스 초기화
-            initRiskMatrix();
-            
+            document.getElementById('riskWork').value = '';
+            document.getElementById('riskType').value = '';
+            document.getElementById('riskFreq').value = '';
+            document.getElementById('riskSeverity').value = '';
+            document.getElementById('riskMeasures').value = '';
             show('riskModal');
         }
 
@@ -1685,267 +961,27 @@
             hide('riskModal');
         }
 
-        function initRiskMatrix() {
-            const container = document.getElementById('riskMatrix');
-            const matrix = [];
-            
-            for (let s = 4; s >= 1; s--) {
-                for (let f = 1; f <= 4; f++) {
-                    const score = f * s;
-                    let riskClass = 'risk-low';
-                    if (score >= 12) riskClass = 'risk-critical';
-                    else if (score >= 8) riskClass = 'risk-high';
-                    else if (score >= 4) riskClass = 'risk-medium';
-                    
-                    matrix.push(`<div class="risk-cell ${riskClass}">${score}</div>`);
-                }
-            }
-            
-            container.innerHTML = matrix.join('');
-        }
-
-        function calculateRisk() {
-            const freq = parseInt(document.getElementById('riskFreq').value) || 0;
-            const severity = parseInt(document.getElementById('riskSeverity').value) || 0;
-            
-            if (freq === 0 || severity === 0) return;
-            
-            const score = freq * severity;
-            document.getElementById('riskScore').textContent = score;
-            
-            let level = '하';
-            let levelClass = 'badge-safe';
-            
-            if (score >= 12) {
-                level = '상';
-                levelClass = 'badge-critical';
-                document.getElementById('measuresRequired').style.display = 'block';
-            } else if (score >= 8) {
-                level = '중';
-                levelClass = 'badge-warning';
-                document.getElementById('measuresRequired').style.display = 'none';
-            } else if (score >= 4) {
-                level = '하';
-                levelClass = 'badge-caution';
-                document.getElementById('measuresRequired').style.display = 'none';
-            }
-            
-            document.getElementById('riskLevel').textContent = level;
-            document.getElementById('riskLevel').className = 'badge ' + levelClass;
-        }
-
-        function saveRiskAssessment(e) {
+        function saveRisk(e) {
             e.preventDefault();
 
             const risks = Store.get('risks');
-            const wbsId = document.getElementById('riskWBS').value;
-            const wbs = Store.get('wbs').find(w => w.id === wbsId);
-
-            const risk = {
+            risks.push({
                 id: 'risk-' + Date.now(),
-                date: document.getElementById('riskDate').value,
-                wbsId: wbsId,
-                wbsName: wbs ? wbs.name : '',
+                work: document.getElementById('riskWork').value,
                 type: document.getElementById('riskType').value,
-                desc: document.getElementById('riskDesc').value,
                 frequency: parseInt(document.getElementById('riskFreq').value),
                 severity: parseInt(document.getElementById('riskSeverity').value),
-                score: parseInt(document.getElementById('riskScore').textContent),
-                level: document.getElementById('riskLevel').textContent,
                 measures: document.getElementById('riskMeasures').value,
-                manager: document.getElementById('riskManager').value,
-                createdAt: new Date().toISOString()
-            };
-
-            risks.push(risk);
-            Store.set('risks', risks);
-
-            closeRiskModal();
-            loadSafety();
-            
-            // TBM 자동 생성 제안
-            if (confirm('위험성평가를 TBM 교육자료로 생성하시겠습니까?')) {
-                createTBMFromRisk(risk);
-            } else {
-                alert('위험성평가가 저장되었습니다.');
-            }
-        }
-
-        function createTBMFromRisk(risk) {
-            document.getElementById('tbmDate').value = new Date().toISOString().slice(0, 16);
-            document.getElementById('tbmLocation').value = '현장 사무실';
-            document.getElementById('tbmAttendees').value = '10';
-            
-            const content = `[위험성평가 기반 TBM]
-            
-작업: ${risk.wbsName}
-위험요인: ${risk.type}
-위험상황: ${risk.desc}
-위험등급: ${risk.level} (${risk.score}점)
-
-필수 안전조치:
-${risk.measures}
-
-담당: ${risk.manager}`;
-            
-            document.getElementById('tbmContent').value = content;
-            
-            closeRiskModal();
-            show('tbmModal');
-        }
-
-        function openTBMModal() {
-            document.getElementById('tbmDate').value = new Date().toISOString().slice(0, 16);
-            
-            // 금일 위험성평가 목록
-            const risks = Store.get('risks');
-            const today = new Date().toISOString().split('T')[0];
-            const todayRisks = risks.filter(r => r.date === today);
-            
-            const select = document.getElementById('tbmRisk');
-            select.innerHTML = '<option value="">수동 입력</option>' +
-                todayRisks.map(r => `<option value="${r.id}">${r.wbsName} - ${r.type}</option>`).join('');
-            
-            show('tbmModal');
-        }
-
-        function closeTBMModal() {
-            hide('tbmModal');
-        }
-
-        function loadRiskToTBM() {
-            const riskId = document.getElementById('tbmRisk').value;
-            if (!riskId) return;
-            
-            const risk = Store.get('risks').find(r => r.id === riskId);
-            if (risk) {
-                createTBMFromRisk(risk);
-            }
-        }
-
-        function openSignature() {
-            const canvas = document.getElementById('signatureCanvas');
-            canvas.classList.remove('hidden');
-            
-            if (!signaturePad) {
-                signaturePad = {
-                    canvas: canvas,
-                    ctx: canvas.getContext('2d'),
-                    drawing: false
-                };
-                
-                canvas.addEventListener('mousedown', startDrawing);
-                canvas.addEventListener('mousemove', draw);
-                canvas.addEventListener('mouseup', stopDrawing);
-                canvas.addEventListener('touchstart', startDrawing);
-                canvas.addEventListener('touchmove', draw);
-                canvas.addEventListener('touchend', stopDrawing);
-            }
-        }
-
-        function startDrawing(e) {
-            e.preventDefault();
-            if (!signaturePad) return;
-            signaturePad.drawing = true;
-            const rect = signaturePad.canvas.getBoundingClientRect();
-            const x = (e.clientX || e.touches[0].clientX) - rect.left;
-            const y = (e.clientY || e.touches[0].clientY) - rect.top;
-            signaturePad.ctx.beginPath();
-            signaturePad.ctx.moveTo(x, y);
-        }
-
-        function draw(e) {
-            e.preventDefault();
-            if (!signaturePad || !signaturePad.drawing) return;
-            const rect = signaturePad.canvas.getBoundingClientRect();
-            const x = (e.clientX || e.touches[0].clientX) - rect.left;
-            const y = (e.clientY || e.touches[0].clientY) - rect.top;
-            signaturePad.ctx.lineTo(x, y);
-            signaturePad.ctx.strokeStyle = '#000';
-            signaturePad.ctx.lineWidth = 2;
-            signaturePad.ctx.stroke();
-        }
-
-        function stopDrawing() {
-            if (signaturePad) signaturePad.drawing = false;
-        }
-
-        function clearSignature() {
-            if (signaturePad) {
-                signaturePad.ctx.clearRect(0, 0, signaturePad.canvas.width, signaturePad.canvas.height);
-            }
-        }
-
-        function saveTBM(e) {
-            e.preventDefault();
-
-            const tbms = Store.get('tbms');
-            const tbm = {
-                id: 'tbm-' + Date.now(),
-                date: document.getElementById('tbmDate').value,
-                location: document.getElementById('tbmLocation').value,
-                attendees: parseInt(document.getElementById('tbmAttendees').value),
-                content: document.getElementById('tbmContent').value,
-                signature: signaturePad ? signaturePad.canvas.toDataURL() : null,
-                userId: user.id,
-                createdAt: new Date().toISOString()
-            };
-
-            tbms.push(tbm);
-            Store.set('tbms', tbms);
-
-            closeTBMModal();
-            loadSafety();
-            alert('TBM이 저장되었습니다.');
-        }
-
-        // ==================== 가입 승인 ====================
-        function loadPending() {
-            const users = Store.get('users').filter(u => !u.approved);
-            const tbody = document.querySelector('#pendingTable tbody');
-            tbody.innerHTML = '';
-
-            users.forEach(u => {
-                const row = tbody.insertRow();
-                row.innerHTML = `
-                    <td>${u.email}</td>
-                    <td>${u.name}</td>
-                    <td>${new Date(u.createdAt).toLocaleDateString('ko-KR')}</td>
-                    <td>
-                        <button onclick="approve('${u.id}')" class="btn btn-success btn-sm">승인</button>
-                        <button onclick="reject('${u.id}')" class="btn btn-danger btn-sm">거부</button>
-                    </td>
-                `;
+                date: new Date().toISOString()
             });
 
-            if (users.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="4" class="text-center text-gray-400">승인 대기중인 회원이 없습니다</td></tr>';
-            }
+            Store.set('risks', risks);
+            closeRiskModal();
+            loadSafety();
+            loadDashboard();
+            alert('위험성평가가 저장되었습니다.');
         }
 
-        function approve(id) {
-            if (confirm('승인하시겠습니까?')) {
-                const users = Store.get('users');
-                const u = users.find(x => x.id === id);
-                if (u) {
-                    u.approved = true;
-                    Store.set('users', users);
-                    loadPending();
-                    alert('승인되었습니다.');
-                }
-            }
-        }
-
-        function reject(id) {
-            if (confirm('거부하시겠습니까?')) {
-                const users = Store.get('users').filter(x => x.id !== id);
-                Store.set('users', users);
-                loadPending();
-                alert('거부되었습니다.');
-            }
-        }
-
-        // ==================== 유틸리티 ====================
         function showMsg(id, msg, type) {
             const el = document.getElementById(id);
             el.textContent = msg;
@@ -1962,20 +998,15 @@ ${risk.measures}
             if (el) el.classList.remove('hidden');
         }
 
-        // ==================== 초기화 ====================
         window.addEventListener('DOMContentLoaded', () => {
             init();
             const saved = Store.getObj('currentUser');
             if (saved && saved.id) {
                 const users = Store.get('users');
-                const found = users.find(u => u.id === saved.id);
-                if (found && found.approved) {
+                const found = users.find(u => u.id === saved.id && u.approved);
+                if (found) {
                     user = found;
-                    const projects = Store.get('projects');
-                    if (projects.length > 0) {
-                        currentProject = projects[0];
-                    }
-                    hide('selectScreen');
+                    hide('loginScreen');
                     showApp();
                 }
             }
