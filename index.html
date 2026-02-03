@@ -3,174 +3,437 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="건설사업관리시스템 - WBS 기반 EVM 통합 플랫폼">
     <title>PMIS - 건설사업관리시스템</title>
-    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/modal.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            background-attachment: fixed;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+        }
+
+        .hidden { display: none !important; }
+        .container { max-width: 500px; margin: 0 auto; padding: 16px; }
+        .app-container { max-width: 1600px; margin: 0 auto; padding: 16px; }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+        }
+
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .btn-primary { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .btn-primary:hover { transform: translateY(-2px); }
+        .btn-success { background: linear-gradient(135deg, #56ab2f, #a8e063); }
+        .btn-danger { background: linear-gradient(135deg, #eb3349, #f45c43); }
+        .btn-sm { padding: 8px 16px; font-size: 12px; }
+        .btn-block { width: 100%; }
+
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            color: #fff;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .tab.active { background: linear-gradient(135deg, #667eea, #764ba2); }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .badge-safe { background: #56ab2f; }
+        .badge-caution { background: #f9d423; color: #000; }
+        .badge-warning { background: #ff9966; }
+        .badge-critical { background: #eb3349; }
+        .role-admin { background: #f093fb; }
+
+        input, select, textarea {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 10px;
+            color: #fff;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        input::placeholder { color: rgba(255, 255, 255, 0.5); }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea { min-height: 80px; }
+        label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 500; }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .modal.active { display: block; }
+
+        .modal-content {
+            background: rgba(15, 12, 41, 0.98);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .modal-close {
+            font-size: 28px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #fff;
+        }
+
+        .form-group { margin-bottom: 16px; }
+        .form-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .form-section-title {
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #a8edea;
+        }
+
+        .site-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        /* WBS 트리 구조 */
+        .wbs-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid #667eea;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .wbs-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(4px);
+        }
+
+        .wbs-item.level-0 { margin-left: 0; border-left-color: #667eea; }
+        .wbs-item.level-1 { margin-left: 30px; border-left-color: #56ab2f; }
+        .wbs-item.level-2 { margin-left: 60px; border-left-color: #f9d423; }
+
+        .wbs-code {
+            font-weight: 700;
+            color: #a8edea;
+            margin-right: 12px;
+        }
+
+        /* EVM */
+        .evm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .evm-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .evm-label { font-size: 0.875rem; color: #9ca3af; margin-bottom: 8px; }
+        .evm-value { font-size: 2rem; font-weight: 700; margin-top: 8px; }
+        .evm-value.good { color: #56ab2f; }
+        .evm-value.bad { color: #eb3349; }
+        .evm-value.normal { color: #f9d423; }
+
+        .gauge-container {
+            width: 150px;
+            height: 100px;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .gauge-label {
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .min-h-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .text-center { text-align: center; }
+        .text-muted { color: #9ca3af; }
+        .mb-4 { margin-bottom: 16px; }
+        .mb-6 { margin-bottom: 24px; }
+        .mt-4 { margin-top: 16px; }
+        .p-4 { padding: 16px; }
+        .p-6 { padding: 24px; }
+        .p-8 { padding: 32px; }
+        .flex { display: flex; }
+        .justify-between { justify-content: space-between; }
+        .items-center { align-items: center; }
+        .gap-2 { gap: 8px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+        .logo-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 8px; }
+        .logo-subtitle { font-size: 1.125rem; color: #d1d5db; margin-bottom: 4px; }
+        .logo-desc { font-size: 0.875rem; color: #9ca3af; margin-bottom: 32px; }
+
+        .app-header {
+            padding: 16px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .app-nav {
+            padding: 16px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 8px;
+            min-width: max-content;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .section-title { font-size: 1.5rem; font-weight: 700; }
+        .section-content { padding: 24px; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in { animation: fadeIn 0.5s; }
+    </style>
 </head>
 <body>
     <!-- 로그인 화면 -->
-    <div id="loginScreen" class="screen">
+    <div id="loginScreen" class="min-h-screen">
         <div class="container">
-            <div class="glass login-box fade-in">
-                <div class="logo-section">
+            <div class="glass p-8 fade-in">
+                <div class="text-center">
                     <h1 class="logo-title">🏗️ PMIS</h1>
                     <p class="logo-subtitle">건설사업관리시스템</p>
                     <p class="logo-desc">WBS 기반 EVM 통합 플랫폼</p>
                 </div>
                 
-                <form id="loginForm" class="auth-form">
+                <form id="loginForm">
                     <div class="form-group">
-                        <label for="loginEmail">이메일</label>
-                        <input type="email" id="loginEmail" required placeholder="이메일을 입력하세요">
+                        <label>이메일</label>
+                        <input type="email" id="loginEmail" required>
                     </div>
-                    <div class="form-group">
-                        <label for="loginPassword">비밀번호</label>
-                        <input type="password" id="loginPassword" required placeholder="비밀번호를 입력하세요">
+                    <div class="form-group mb-6">
+                        <label>비밀번호</label>
+                        <input type="password" id="loginPassword" required>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">로그인</button>
-                    <p class="hint-text">관리자 계정: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="94f5f0f9fdfad4e4f9fde7baf7fbf9">[email&#160;protected]</a></p>
+                    <p class="text-muted text-center mt-4" style="font-size: 0.75rem;">
+                        관리자: admin@pmis.com / 1234
+                    </p>
                 </form>
-
-                <div id="loginMessage" class="message"></div>
+                <div id="loginMessage" class="mt-4 text-center"></div>
             </div>
         </div>
     </div>
 
-    <!-- 메인 앱 화면 -->
-    <div id="appScreen" class="screen hidden">
-        <!-- 헤더 -->
-        <header class="app-header glass">
-            <div class="header-left">
-                <h2 class="header-title">🏗️ PMIS</h2>
-                <p class="header-subtitle" id="userInfo"></p>
-            </div>
-            <div class="header-right">
-                <button id="logoutBtn" class="btn btn-danger btn-sm">로그아웃</button>
-            </div>
-        </header>
-
-        <!-- 네비게이션 탭 -->
-        <nav class="app-nav glass">
-            <div class="nav-tabs">
-                <button class="tab active" data-tab="dashboard">대시보드</button>
-                <button class="tab" data-tab="sites">현장관리</button>
-                <button class="tab" data-tab="wbs">WBS</button>
-                <button class="tab" data-tab="daily">작업일보</button>
-                <button class="tab" data-tab="evm">EVM 분석</button>
-                <button class="tab" data-tab="safety">안전관리</button>
-            </div>
-        </nav>
-
-        <!-- 컨텐츠 영역 -->
-        <main class="app-main">
-            <!-- 대시보드 -->
-            <section id="contentDashboard" class="content-section active">
-                <div class="dashboard-grid">
-                    <div class="dashboard-card glass-dark">
-                        <h3 class="card-title">평균 공정률</h3>
-                        <div id="progressChart" class="chart-container"></div>
-                        <p class="stat-value" id="avgProgress">0%</p>
-                    </div>
-
-                    <div class="dashboard-card glass-dark">
-                        <h3 class="card-title">현장 통계</h3>
-                        <div class="stats-grid">
-                            <div class="stat-item">
-                                <span class="stat-label">총 현장</span>
-                                <span class="stat-value" id="totalSites">0</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-label">안전</span>
-                                <span class="stat-value text-green" id="safeSites">0</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-label">주의</span>
-                                <span class="stat-value text-yellow" id="cautionSites">0</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-label">심각</span>
-                                <span class="stat-value text-red" id="criticalSites">0</span>
-                            </div>
-                        </div>
-                    </div>
+    <!-- 메인 앱 -->
+    <div id="appScreen" class="hidden">
+        <div class="app-container">
+            <header class="app-header glass">
+                <div>
+                    <h2 style="font-size: 1.25rem; font-weight: 700;">🏗️ PMIS</h2>
+                    <p id="userInfo" style="font-size: 0.875rem; color: #d1d5db;"></p>
                 </div>
+                <button onclick="logout()" class="btn btn-danger btn-sm">로그아웃</button>
+            </header>
 
+            <nav class="app-nav glass">
+                <div class="nav-tabs">
+                    <button class="tab active" onclick="switchTab('dashboard')">대시보드</button>
+                    <button class="tab" onclick="switchTab('sites')">현장관리</button>
+                    <button class="tab" onclick="switchTab('wbs')">WBS</button>
+                    <button class="tab" onclick="switchTab('daily')">작업일보</button>
+                    <button class="tab" onclick="switchTab('evm')">EVM 분석</button>
+                    <button class="tab" onclick="switchTab('safety')">안전관리</button>
+                </div>
+            </nav>
+
+            <!-- 대시보드 -->
+            <div id="contentDashboard" style="padding: 0 16px;">
                 <div class="glass-dark section-content">
-                    <h3 class="section-title">현장 목록</h3>
+                    <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 16px;">현장 목록</h3>
                     <div id="dashSiteList"></div>
                 </div>
-            </section>
+            </div>
 
             <!-- 현장관리 -->
-            <section id="contentSites" class="content-section">
+            <div id="contentSites" class="hidden" style="padding: 0 16px;">
                 <div class="section-header">
                     <h2 class="section-title">현장 관리</h2>
-                    <button id="addSiteBtn" class="btn btn-primary">+ 현장 추가</button>
+                    <button onclick="openSiteModal()" class="btn btn-primary">+ 현장 추가</button>
                 </div>
                 <div id="sitesList"></div>
-            </section>
+            </div>
 
             <!-- WBS -->
-            <section id="contentWBS" class="content-section">
+            <div id="contentWBS" class="hidden" style="padding: 0 16px;">
                 <div class="section-header">
-                    <h2 class="section-title">WBS 관리</h2>
-                    <button id="addWBSBtn" class="btn btn-primary">+ WBS 추가</button>
+                    <h2 class="section-title">WBS 작업분류체계</h2>
+                    <button onclick="openWBSModal()" class="btn btn-primary">+ WBS 추가</button>
                 </div>
                 <div class="glass-dark section-content">
-                    <div id="wbsList"></div>
+                    <div id="wbsTree"></div>
                 </div>
-            </section>
+            </div>
 
             <!-- 작업일보 -->
-            <section id="contentDaily" class="content-section">
+            <div id="contentDaily" class="hidden" style="padding: 0 16px;">
                 <div class="section-header">
                     <h2 class="section-title">작업일보</h2>
-                    <button id="addDailyBtn" class="btn btn-primary">+ 일보 작성</button>
+                    <button onclick="openDailyModal()" class="btn btn-primary">+ 일보 작성</button>
                 </div>
                 <div class="glass-dark section-content">
                     <div id="dailyList"></div>
                 </div>
-            </section>
+            </div>
 
             <!-- EVM 분석 -->
-            <section id="contentEVM" class="content-section">
-                <h2 class="section-title">EVM 분석</h2>
+            <div id="contentEVM" class="hidden" style="padding: 0 16px;">
+                <h2 class="section-title mb-4">EVM 기성고 관리</h2>
+                
                 <div class="evm-grid">
-                    <div class="evm-card glass-dark">
-                        <div class="evm-label">BAC (총예산)</div>
+                    <div class="evm-card">
+                        <div class="evm-label">BAC (총 예산)</div>
                         <div class="evm-value" id="evmBAC">0억</div>
                     </div>
-                    <div class="evm-card glass-dark">
-                        <div class="evm-label">PV (계획공사비)</div>
+                    <div class="evm-card">
+                        <div class="evm-label">PV (계획 기성)</div>
                         <div class="evm-value" id="evmPV">0억</div>
                     </div>
-                    <div class="evm-card glass-dark">
-                        <div class="evm-label">EV (달성공사비)</div>
+                    <div class="evm-card">
+                        <div class="evm-label">EV (실적 기성)</div>
                         <div class="evm-value" id="evmEV">0억</div>
                     </div>
-                    <div class="evm-card glass-dark">
-                        <div class="evm-label">SPI</div>
-                        <div class="evm-value" id="evmSPI">0.00</div>
+                    <div class="evm-card">
+                        <div class="evm-label">AC (실투입비)</div>
+                        <div class="evm-value" id="evmAC">0억</div>
                     </div>
                 </div>
-            </section>
+
+                <div class="grid-2" style="margin-bottom: 24px;">
+                    <div class="glass-dark p-6">
+                        <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 16px; text-align: center;">
+                            SPI (일정 성과)
+                        </h3>
+                        <div class="gauge-container" id="spiGauge">
+                            <div class="gauge-label" id="spiValue">0.00</div>
+                        </div>
+                        <p id="spiStatus" class="text-center text-muted"></p>
+                    </div>
+                    <div class="glass-dark p-6">
+                        <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 16px; text-align: center;">
+                            CPI (원가 성과)
+                        </h3>
+                        <div class="gauge-container" id="cpiGauge">
+                            <div class="gauge-label" id="cpiValue">0.00</div>
+                        </div>
+                        <p id="cpiStatus" class="text-center text-muted"></p>
+                    </div>
+                </div>
+
+                <div class="glass-dark p-6">
+                    <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 16px;">S-Curve (누적 공정 곡선)</h3>
+                    <svg id="sCurveSvg" style="width: 100%; height: 300px;"></svg>
+                </div>
+            </div>
 
             <!-- 안전관리 -->
-            <section id="contentSafety" class="content-section">
+            <div id="contentSafety" class="hidden" style="padding: 0 16px;">
                 <div class="section-header">
                     <h2 class="section-title">안전관리</h2>
-                    <button id="addRiskBtn" class="btn btn-primary">+ 위험성평가</button>
+                    <button onclick="openRiskModal()" class="btn btn-primary">+ 위험성평가</button>
                 </div>
                 <div class="glass-dark section-content">
                     <div id="riskList"></div>
                 </div>
-            </section>
-        </main>
+            </div>
+        </div>
     </div>
 
     <!-- 모달들 -->
@@ -179,12 +442,673 @@
     <div id="dailyModal" class="modal"></div>
     <div id="riskModal" class="modal"></div>
 
-    <!-- JavaScript -->
-    <script src="js/utils/storage.js"></script>
-    <script src="js/utils/helpers.js"></script>
-    <script src="js/utils/sample-data.js"></script>
-    <script src="js/components/modal.js"></script>
-    <script src="js/modules/auth.js"></script>
-    <script src="js/modules/dashboard.js"></script>
-    <script src="js/modules/sites.js"></script>
-    <script src="j
+    <script>
+        let currentUser = null;
+
+        const Storage = {
+            get(key) {
+                try { return JSON.parse(localStorage.getItem(key)) || []; }
+                catch (e) { return []; }
+            },
+            set(key, value) {
+                try { localStorage.setItem(key, JSON.stringify(value)); return true; }
+                catch (e) { alert('저장 공간이 부족합니다.'); return false; }
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initAdminAccount();
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) loginForm.addEventListener('submit', handleLogin);
+            restoreSession();
+        });
+
+        function initAdminAccount() {
+            const users = Storage.get('users');
+            if (!users.find(u => u.email === 'admin@pmis.com')) {
+                users.push({
+                    id: 'admin-001',
+                    email: 'admin@pmis.com',
+                    password: '1234',
+                    name: '시스템 관리자',
+                    role: 'admin',
+                    approved: true
+                });
+                Storage.set('users', users);
+            }
+        }
+
+        window.handleLogin = function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
+            const users = Storage.get('users');
+            const user = users.find(u => u.email === email && u.password === password && u.approved);
+
+            if (!user) {
+                const msg = document.getElementById('loginMessage');
+                msg.textContent = '로그인 정보가 올바르지 않습니다.';
+                msg.style.color = '#f87171';
+                return;
+            }
+
+            currentUser = user;
+            Storage.set('currentUser', user);
+            showApp();
+        };
+
+        function showApp() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('appScreen').classList.remove('hidden');
+            document.getElementById('userInfo').innerHTML = `<span class="badge role-admin">관리자</span> ${currentUser.name}`;
+            loadDashboard();
+        }
+
+        function restoreSession() {
+            const saved = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            if (saved && saved.id) {
+                const users = Storage.get('users');
+                const user = users.find(u => u.id === saved.id && u.approved);
+                if (user) {
+                    currentUser = user;
+                    showApp();
+                }
+            }
+        }
+
+        window.logout = function() {
+            if (confirm('로그아웃 하시겠습니까?')) {
+                currentUser = null;
+                localStorage.removeItem('currentUser');
+                document.getElementById('appScreen').classList.add('hidden');
+                document.getElementById('loginScreen').classList.remove('hidden');
+                document.getElementById('loginForm').reset();
+            }
+        };
+
+        window.switchTab = function(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            ['Dashboard', 'Sites', 'WBS', 'Daily', 'EVM', 'Safety'].forEach(name => {
+                const el = document.getElementById('content' + name);
+                if (el) el.classList.add('hidden');
+            });
+            event.target.classList.add('active');
+            const contentId = 'content' + tabName.charAt(0).toUpperCase() + tabName.slice(1);
+            const content = document.getElementById(contentId);
+            if (content) content.classList.remove('hidden');
+            
+            if (tabName === 'dashboard') loadDashboard();
+            else if (tabName === 'sites') loadSites();
+            else if (tabName === 'wbs') loadWBS();
+            else if (tabName === 'daily') loadDaily();
+            else if (tabName === 'evm') loadEVM();
+            else if (tabName === 'safety') loadSafety();
+        };
+
+        function loadDashboard() {
+            const sites = Storage.get('sites');
+            const container = document.getElementById('dashSiteList');
+            if (!container) return;
+
+            if (sites.length === 0) {
+                container.innerHTML = '<div class="text-center text-muted">등록된 현장이 없습니다</div>';
+                return;
+            }
+
+            container.innerHTML = sites.map(site => {
+                const ratio = site.plannedProgress > 0 ? Math.round((site.actualProgress / site.plannedProgress) * 100) : 100;
+                let statusClass = 'badge-safe';
+                if (ratio < 90) statusClass = 'badge-critical';
+                else if (ratio < 95) statusClass = 'badge-warning';
+                else if (ratio < 100) statusClass = 'badge-caution';
+
+                return `
+                    <div class="site-card">
+                        <div class="flex justify-between items-center">
+                            <div style="flex: 1;">
+                                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 8px;">${site.name}</h3>
+                                <p class="text-muted" style="margin-bottom: 12px;">${site.startDate} ~ ${site.endDate}</p>
+                                <p>계획: ${site.plannedProgress}% | 실제: ${site.actualProgress}%</p>
+                            </div>
+                            <span class="badge ${statusClass}">${ratio}%</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function loadSites() {
+            loadDashboard();
+            const dash = document.getElementById('dashSiteList');
+            const sites = document.getElementById('sitesList');
+            if (dash && sites) sites.innerHTML = dash.innerHTML;
+        }
+
+        window.openSiteModal = function() {
+            const modal = document.getElementById('siteModal');
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 style="font-size: 1.5rem; font-weight: 700;">현장 등록</h3>
+                        <button onclick="closeModal('siteModal')" class="modal-close">&times;</button>
+                    </div>
+                    <form onsubmit="saveSite(event)">
+                        <div class="form-section">
+                            <div class="form-section-title">기본 정보</div>
+                            <div class="form-group">
+                                <label>공사명 *</label>
+                                <input type="text" id="siteName" required>
+                            </div>
+                            <div class="grid-2">
+                                <div class="form-group">
+                                    <label>시작일 *</label>
+                                    <input type="date" id="siteStartDate" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>종료일 *</label>
+                                    <input type="date" id="siteEndDate" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-section">
+                            <div class="form-section-title">공정률</div>
+                            <div class="grid-2">
+                                <div class="form-group">
+                                    <label>계획 공정률 (%)</label>
+                                    <input type="number" id="plannedProgress" min="0" max="100" value="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>실제 공정률 (%)</label>
+                                    <input type="number" id="actualProgress" min="0" max="100" value="0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button type="submit" class="btn btn-success" style="flex: 1;">저장</button>
+                            <button type="button" onclick="closeModal('siteModal')" class="btn btn-danger" style="flex: 1;">취소</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            modal.classList.add('active');
+        };
+
+        window.saveSite = function(e) {
+            e.preventDefault();
+            const sites = Storage.get('sites');
+            sites.push({
+                id: 'site-' + Date.now(),
+                name: document.getElementById('siteName').value,
+                startDate: document.getElementById('siteStartDate').value,
+                endDate: document.getElementById('siteEndDate').value,
+                plannedProgress: parseInt(document.getElementById('plannedProgress').value) || 0,
+                actualProgress: parseInt(document.getElementById('actualProgress').value) || 0,
+                ownerId: currentUser.id,
+                createdAt: new Date().toISOString()
+            });
+            Storage.set('sites', sites);
+            closeModal('siteModal');
+            loadSites();
+            loadDashboard();
+            alert('현장이 저장되었습니다!');
+        };
+
+        // ==================== WBS ====================
+        function loadWBS() {
+            const wbsItems = Storage.get('wbs');
+            const container = document.getElementById('wbsTree');
+            if (!container) return;
+
+            if (wbsItems.length === 0) {
+                container.innerHTML = '<div class="text-center text-muted">등록된 WBS가 없습니다<br><small>+ WBS 추가 버튼을 눌러 작업을 등록하세요</small></div>';
+                return;
+            }
+
+            const sorted = wbsItems.sort((a, b) => a.code.localeCompare(b.code, undefined, { numeric: true }));
+
+            container.innerHTML = sorted.map(wbs => {
+                const level = (wbs.code.match(/\./g) || []).length;
+                return `
+                    <div class="wbs-item level-${level}">
+                        <div class="flex justify-between items-center">
+                            <div style="flex: 1;">
+                                <span class="wbs-code">${wbs.code}</span>
+                                <span>${wbs.name}</span>
+                            </div>
+                            <div style="font-size: 0.875rem; color: #9ca3af;">
+                                예산: ${(wbs.budget || 0).toLocaleString()}백만 | 
+                                진행률: ${wbs.progress || 0}% | 
+                                가중치: ${wbs.weight || 0}% |
+                                실투입: ${(wbs.actualCost || 0).toLocaleString()}백만
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        window.openWBSModal = function() {
+            const modal = document.getElementById('wbsModal');
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 style="font-size: 1.5rem; font-weight: 700;">WBS 추가</h3>
+                        <button onclick="closeModal('wbsModal')" class="modal-close">&times;</button>
+                    </div>
+                    <form onsubmit="saveWBS(event)">
+                        <div class="form-section">
+                            <div class="form-section-title">WBS 정보</div>
+                            <div class="form-group">
+                                <label>WBS 코드 * (예: 1, 1.1, 1.1.1)</label>
+                                <input type="text" id="wbsCode" required placeholder="1.1.1">
+                            </div>
+                            <div class="form-group">
+                                <label>작업명 *</label>
+                                <input type="text" id="wbsName" required>
+                            </div>
+                        </div>
+                        <div class="form-section">
+                            <div class="form-section-title">예산 및 원가</div>
+                            <div class="grid-3">
+                                <div class="form-group">
+                                    <label>예산 (BAC, 백만원) *</label>
+                                    <input type="number" id="wbsBudget" value="0" min="0" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>실투입비 (AC, 백만원)</label>
+                                    <input type="number" id="wbsActualCost" value="0" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>가중치 (%)</label>
+                                    <input type="number" id="wbsWeight" value="0" min="0" max="100">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-section">
+                            <div class="form-section-title">공정 정보</div>
+                            <div class="grid-2">
+                                <div class="form-group">
+                                    <label>계획 공정률 (%)</label>
+                                    <input type="number" id="wbsPlannedProgress" value="0" min="0" max="100">
+                                </div>
+                                <div class="form-group">
+                                    <label>실적 공정률 (%)</label>
+                                    <input type="number" id="wbsProgress" value="0" min="0" max="100">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button type="submit" class="btn btn-success" style="flex: 1;">저장</button>
+                            <button type="button" onclick="closeModal('wbsModal')" class="btn btn-danger" style="flex: 1;">취소</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            modal.classList.add('active');
+        };
+
+        window.saveWBS = function(e) {
+            e.preventDefault();
+            const wbs = Storage.get('wbs');
+            wbs.push({
+                id: 'wbs-' + Date.now(),
+                code: document.getElementById('wbsCode').value,
+                name: document.getElementById('wbsName').value,
+                budget: parseFloat(document.getElementById('wbsBudget').value) || 0,
+                actualCost: parseFloat(document.getElementById('wbsActualCost').value) || 0,
+                weight: parseFloat(document.getElementById('wbsWeight').value) || 0,
+                plannedProgress: parseFloat(document.getElementById('wbsPlannedProgress').value) || 0,
+                progress: parseFloat(document.getElementById('wbsProgress').value) || 0,
+                createdAt: new Date().toISOString()
+            });
+            Storage.set('wbs', wbs);
+            closeModal('wbsModal');
+            loadWBS();
+            loadEVM();
+            alert('WBS가 저장되었습니다!');
+        };
+
+        // ==================== EVM ====================
+        function loadEVM() {
+            const wbs = Storage.get('wbs');
+            
+            if (wbs.length === 0) {
+                document.getElementById('evmBAC').textContent = '0억';
+                document.getElementById('evmPV').textContent = '0억';
+                document.getElementById('evmEV').textContent = '0억';
+                document.getElementById('evmAC').textContent = '0억';
+                document.getElementById('spiValue').textContent = '0.00';
+                document.getElementById('cpiValue').textContent = '0.00';
+                return;
+            }
+
+            // BAC (총 예산)
+            const bac = wbs.reduce((sum, w) => sum + (w.budget || 0), 0);
+
+            // 가중치 총합
+            const totalWeight = wbs.reduce((sum, w) => sum + (w.weight || 0), 0);
+            const avgWeight = totalWeight > 0 ? totalWeight / wbs.length : 1;
+
+            // PV (계획 기성) = Σ(예산 × 계획공정률 / 100)
+            const pv = wbs.reduce((sum, w) => {
+                return sum + (w.budget || 0) * (w.plannedProgress || 0) / 100;
+            }, 0);
+
+            // EV (실적 기성) = Σ(예산 × 실적공정률 / 100)
+            const ev = wbs.reduce((sum, w) => {
+                return sum + (w.budget || 0) * (w.progress || 0) / 100;
+            }, 0);
+
+            // AC (실투입비)
+            const ac = wbs.reduce((sum, w) => sum + (w.actualCost || 0), 0);
+
+            // SPI = EV / PV
+            const spi = pv > 0 ? ev / pv : 0;
+
+            // CPI = EV / AC
+            const cpi = ac > 0 ? ev / ac : 0;
+
+            // 화면 업데이트
+            document.getElementById('evmBAC').textContent = (bac / 100).toFixed(1) + '억';
+            document.getElementById('evmPV').textContent = (pv / 100).toFixed(1) + '억';
+            document.getElementById('evmEV').textContent = (ev / 100).toFixed(1) + '억';
+            document.getElementById('evmAC').textContent = (ac / 100).toFixed(1) + '억';
+
+            // SPI
+            const spiEl = document.getElementById('spiValue');
+            spiEl.textContent = spi.toFixed(2);
+            spiEl.className = 'gauge-label ' + (spi >= 1.0 ? 'good' : spi >= 0.9 ? 'normal' : 'bad');
+            
+            const spiStatus = document.getElementById('spiStatus');
+            if (spi >= 1.0) {
+                spiStatus.textContent = '✅ 공기 단축 (일정 앞당김)';
+                spiStatus.style.color = '#56ab2f';
+            } else if (spi >= 0.9) {
+                spiStatus.textContent = '⚠️ 정상 범위 (일정 준수)';
+                spiStatus.style.color = '#f9d423';
+            } else {
+                spiStatus.textContent = '❌ 공기 지연 (만회대책 필요)';
+                spiStatus.style.color = '#eb3349';
+            }
+
+            // CPI
+            const cpiEl = document.getElementById('cpiValue');
+            cpiEl.textContent = cpi.toFixed(2);
+            cpiEl.className = 'gauge-label ' + (cpi >= 1.0 ? 'good' : cpi >= 0.9 ? 'normal' : 'bad');
+            
+            const cpiStatus = document.getElementById('cpiStatus');
+            if (cpi >= 1.0) {
+                cpiStatus.textContent = '✅ 원가 절감 (예산 대비 절감)';
+                cpiStatus.style.color = '#56ab2f';
+            } else if (cpi >= 0.9) {
+                cpiStatus.textContent = '⚠️ 정상 범위 (원가 준수)';
+                cpiStatus.style.color = '#f9d423';
+            } else {
+                cpiStatus.textContent = '❌ 원가 초과 (원가분석 필요)';
+                cpiStatus.style.color = '#eb3349';
+            }
+
+            drawGauge('spiGauge', spi);
+            drawGauge('cpiGauge', cpi);
+            drawSCurve(wbs);
+        }
+
+        function drawGauge(containerId, value) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            const normalizedValue = Math.min(Math.max(value, 0), 2);
+            const percentage = (normalizedValue / 2) * 100;
+
+            let color = '#56ab2f';
+            if (value < 0.9) color = '#eb3349';
+            else if (value < 1.0) color = '#f9d423';
+
+            const svg = `
+                <svg width="150" height="80" style="overflow: visible;">
+                    <path d="M 20 75 A 55 55 0 0 1 130 75" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="15" stroke-linecap="round"/>
+                    <path d="M 20 75 A 55 55 0 0 1 130 75" fill="none" stroke="${color}" stroke-width="15" 
+                        stroke-linecap="round" stroke-dasharray="173" stroke-dashoffset="${173 - (173 * percentage / 100)}"/>
+                </svg>
+            `;
+
+            const label = container.querySelector('.gauge-label');
+            container.innerHTML = svg;
+            container.appendChild(label);
+        }
+
+        function drawSCurve(wbsItems) {
+            const svg = document.getElementById('sCurveSvg');
+            if (!svg) return;
+
+            const width = 600;
+            const height = 300;
+            const padding = 40;
+
+            svg.innerHTML = '';
+            svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+
+            // 그리드
+            for (let i = 0; i <= 10; i++) {
+                const y = padding + (height - 2 * padding) * i / 10;
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', padding);
+                line.setAttribute('y1', y);
+                line.setAttribute('x2', width - padding);
+                line.setAttribute('y2', y);
+                line.setAttribute('stroke', 'rgba(255,255,255,0.1)');
+                line.setAttribute('stroke-width', '1');
+                svg.appendChild(line);
+            }
+
+            // 계획선
+            const plannedPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            let plannedD = `M ${padding} ${height - padding}`;
+            for (let i = 0; i <= 10; i++) {
+                const x = padding + (width - 2 * padding) * i / 10;
+                const progress = i * 10;
+                const y = height - padding - (height - 2 * padding) * progress / 100;
+                plannedD += ` L ${x} ${y}`;
+            }
+            plannedPath.setAttribute('d', plannedD);
+            plannedPath.setAttribute('fill', 'none');
+            plannedPath.setAttribute('stroke', '#667eea');
+            plannedPath.setAttribute('stroke-width', '3');
+            svg.appendChild(plannedPath);
+
+            // 실적선
+            if (wbsItems.length > 0) {
+                const avgProgress = wbsItems.reduce((sum, w) => sum + (w.progress || 0), 0) / wbsItems.length;
+                const actualPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                let actualD = `M ${padding} ${height - padding}`;
+                const progressX = padding + (width - 2 * padding) * avgProgress / 100;
+                const progressY = height - padding - (height - 2 * padding) * avgProgress / 100;
+                actualD += ` L ${progressX} ${progressY}`;
+                actualPath.setAttribute('d', actualD);
+                actualPath.setAttribute('fill', 'none');
+                actualPath.setAttribute('stroke', '#56ab2f');
+                actualPath.setAttribute('stroke-width', '3');
+                svg.appendChild(actualPath);
+            }
+
+            // 범례
+            const legendPlan = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            legendPlan.setAttribute('x', padding + 20);
+            legendPlan.setAttribute('y', 30);
+            legendPlan.setAttribute('fill', '#667eea');
+            legendPlan.setAttribute('font-size', '14');
+            legendPlan.textContent = '━ 계획';
+            svg.appendChild(legendPlan);
+
+            const legendActual = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            legendActual.setAttribute('x', padding + 100);
+            legendActual.setAttribute('y', 30);
+            legendActual.setAttribute('fill', '#56ab2f');
+            legendActual.setAttribute('font-size', '14');
+            legendActual.textContent = '━ 실적';
+            svg.appendChild(legendActual);
+        }
+
+        // ==================== 작업일보 ====================
+        function loadDaily() {
+            const daily = Storage.get('daily');
+            const container = document.getElementById('dailyList');
+            if (!container) return;
+
+            if (daily.length === 0) {
+                container.innerHTML = '<div class="text-center text-muted">작성된 일보가 없습니다</div>';
+                return;
+            }
+
+            container.innerHTML = daily.sort((a, b) => new Date(b.date) - new Date(a.date)).map(d => `
+                <div class="site-card">
+                    <strong>${d.date}</strong> - 투입: ${d.labor}명<br>${d.work}
+                </div>
+            `).join('');
+        }
+
+        window.openDailyModal = function() {
+            const modal = document.getElementById('dailyModal');
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 style="font-size: 1.5rem; font-weight: 700;">작업일보</h3>
+                        <button onclick="closeModal('dailyModal')" class="modal-close">&times;</button>
+                    </div>
+                    <form onsubmit="saveDaily(event)">
+                        <div class="form-group">
+                            <label>작성일 *</label>
+                            <input type="date" id="dailyDate" value="${new Date().toISOString().split('T')[0]}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>작업 내용 *</label>
+                            <textarea id="dailyWork" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>투입 인력 (명)</label>
+                            <input type="number" id="dailyLabor" value="0">
+                        </div>
+                        <div class="flex gap-2">
+                            <button type="submit" class="btn btn-success" style="flex: 1;">저장</button>
+                            <button type="button" onclick="closeModal('dailyModal')" class="btn btn-danger" style="flex: 1;">취소</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            modal.classList.add('active');
+        };
+
+        window.saveDaily = function(e) {
+            e.preventDefault();
+            const daily = Storage.get('daily');
+            daily.push({
+                id: 'daily-' + Date.now(),
+                date: document.getElementById('dailyDate').value,
+                work: document.getElementById('dailyWork').value,
+                labor: parseInt(document.getElementById('dailyLabor').value) || 0
+            });
+            Storage.set('daily', daily);
+            closeModal('dailyModal');
+            loadDaily();
+            alert('작업일보가 저장되었습니다!');
+        };
+
+        // ==================== 안전관리 ====================
+        function loadSafety() {
+            const risks = Storage.get('risks');
+            const container = document.getElementById('riskList');
+            if (!container) return;
+
+            if (risks.length === 0) {
+                container.innerHTML = '<div class="text-center text-muted">위험성평가가 없습니다</div>';
+                return;
+            }
+
+            container.innerHTML = risks.map(r => {
+                const score = r.frequency * r.severity;
+                let level = '하';
+                if (score >= 12) level = '상';
+                else if (score >= 8) level = '중';
+                return `
+                    <div class="site-card">
+                        <strong>${r.work}</strong> - ${r.type} (위험도: ${level})<br>
+                        조치: ${r.measures}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        window.openRiskModal = function() {
+            const modal = document.getElementById('riskModal');
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 style="font-size: 1.5rem; font-weight: 700;">위험성평가</h3>
+                        <button onclick="closeModal('riskModal')" class="modal-close">&times;</button>
+                    </div>
+                    <form onsubmit="saveRisk(event)">
+                        <div class="form-group">
+                            <label>작업명 *</label>
+                            <input type="text" id="riskWork" required>
+                        </div>
+                        <div class="form-group">
+                            <label>위험 유형 *</label>
+                            <select id="riskType" required>
+                                <option value="">선택</option>
+                                <option value="추락">추락</option>
+                                <option value="낙하">낙하</option>
+                                <option value="협착">협착</option>
+                                <option value="감전">감전</option>
+                            </select>
+                        </div>
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>빈도 (1-4) *</label>
+                                <input type="number" id="riskFreq" min="1" max="4" required>
+                            </div>
+                            <div class="form-group">
+                                <label>강도 (1-4) *</label>
+                                <input type="number" id="riskSeverity" min="1" max="4" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>감소대책 *</label>
+                            <textarea id="riskMeasures" required></textarea>
+                        </div>
+                        <div class="flex gap-2">
+                            <button type="submit" class="btn btn-success" style="flex: 1;">저장</button>
+                            <button type="button" onclick="closeModal('riskModal')" class="btn btn-danger" style="flex: 1;">취소</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            modal.classList.add('active');
+        };
+
+        window.saveRisk = function(e) {
+            e.preventDefault();
+            const risks = Storage.get('risks');
+            risks.push({
+                id: 'risk-' + Date.now(),
+                work: document.getElementById('riskWork').value,
+                type: document.getElementById('riskType').value,
+                frequency: parseInt(document.getElementById('riskFreq').value),
+                severity: parseInt(document.getElementById('riskSeverity').value),
+                measures: document.getElementById('riskMeasures').value
+            });
+            Storage.set('risks', risks);
+            closeModal('riskModal');
+            loadSafety();
+            alert('위험성평가가 저장되었습니다!');
+        };
+
+        // ==================== 유틸리티 ====================
+        window.closeModal = function(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) modal.classList.remove('active');
+        };
+
+        console.log('%c🏗️ PMIS - WBS & EVM 완전 구현', 'color: #667eea; font-size: 16px; font-weight: bold');
+    </script>
+</body>
+</html>
